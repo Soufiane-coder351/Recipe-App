@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from recipes.models import RECIPES
 # Create your views here.
 
 def index(request):
@@ -7,6 +8,8 @@ def index(request):
     return HttpResponse(message)
 
 def showrecipes(request):
-    message = 'Tiramisu <br> Crêpes <br> Omelette au fromage'
+    message = "<p style='font-size: 100px;'> Recettes du jour.</p> <br>"
+    for recipe in RECIPES:
+        message += "<b>" + recipe['name'] + "<b>"+ "<br>"
     return HttpResponse(message)
 
