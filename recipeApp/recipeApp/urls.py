@@ -17,11 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
+from django.urls import re_path
+import recipes.views
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipes/', include('recipes.urls')),
+    re_path(r'^$', recipes.views.index, name = 'index'),
+    path('user/', include('user.urls')),
 ]
 
 if settings.DEBUG:
