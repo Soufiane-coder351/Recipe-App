@@ -18,14 +18,25 @@ def user_info(request):
 def login_view(request):
     if request.method == 'POST':
         # Get form data from the POST request
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
-
         # Initialize an empty list for errors
         errors = []
-
-        # Authenticate the user
-        user = authenticate(request, username=username, password=password)
+        print(email)
+        # Authenticate the user using the email (instead of username)
+        try:
+            # Find the user by email
+            user = User.objects.get(email=email)
+            
+            # Authenticate with the password
+            if user.check_password(password):
+                user = authenticate(request, username=user.username, password=password)
+            else:
+                user = None
+                print("erro , didn't pass 1")
+        except User.DoesNotExist:
+            user = None
+            print("eeror, user does not exist")
 
         # If authentication fails, display an error
         if user is None:
@@ -33,15 +44,14 @@ def login_view(request):
         else:
             # If authentication is successful, log the user in
             login(request, user)
-
             # Redirect to the profile page or home page after successful login
             return redirect('profile')  # Adjust to your target page after login
 
         # If there are errors, render the login page with the error messages
         return render(request, 'user/login.html', {'errors': errors})
+    return render(request, 'user/login.html')    
 
-    return render(request, 'user/login.html')
-    
+
 def signup_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -62,6 +72,9 @@ def signup_view(request):
         # Check if the username already exists
         if User.objects.filter(username=username).exists():
             errors.append("Username already taken.")
+
+        if User.objects.filter(email=email).exists():
+            errors.append("Email already taken.")
         
         # If no errors, create the user
         if not errors:
