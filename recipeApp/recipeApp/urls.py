@@ -25,7 +25,7 @@ import recipes.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipes/', include('recipes.urls')),
-    re_path(r'^$', recipes.views.index, name = 'index'),
+    re_path(r'^$', recipes.views.index),
     path('user/', include('user.urls')),
 ]
 

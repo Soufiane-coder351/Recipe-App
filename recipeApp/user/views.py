@@ -18,6 +18,6 @@ def signup(request):
     template = loader.get_template("./user/signup.html")
     return HttpResponse(template.render(request=request))
 
-def user(request):
-    template = loader.get_template("./user/user.html")
+def profile(request):
+    template = loader.get_template("./user/profile.html")
     return HttpResponse(template.render(request=request))
