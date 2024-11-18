@@ -39,9 +39,12 @@
                     </ul>
                     <form class="d-flex">
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user' %}">User Profile</a>
-                        </li>
+                        <div class="d-flex align-items-center">
+                            <p class="text-dark mb-0 me-3">Bonjour, <span class="fw-bold">{{ user.username }}</span>!</p>
+                            <a class="btn btn-outline-dark btn-sm" href="{% url 'profile' %}">
+                                <i class="bi bi-person-fill"></i> User Profile
+                            </a>
+                        </div>
                         {% else %}
                             <a href="{% url 'login' %}">
                                 <button class="btn btn-outline-dark me-2" type="button"> Log In </button>
