@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'recipes.apps.RecipesConfig'
+    'recipes.apps.RecipesConfig',
+    'user.apps.UserConfig',
 ]
 
 INTERNAL_IPS = ['127.0.0.1']
