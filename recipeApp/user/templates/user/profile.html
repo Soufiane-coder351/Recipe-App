@@ -23,7 +23,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link" href="{% url 'recipes' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">My Account</a></li>
                     </ul>
                     <form class="d-flex">
                         <a href="{% url 'logout' %}">
@@ -63,7 +62,7 @@
                                 <li class="list-group-item">
                                     <i class="bi bi-lock-fill"></i> Change Password
                                     <!-- Link to open the change password form -->
-                                    <a href="{% url 'change_password' %}" class="btn btn-link float-end">Change Password please</a>
+                                    <a href="{% url 'change_password' %}" class="btn btn-link float-end">Change Password</a>
                                 </li>
                                 <!-- {% block content %} -->
                                 <!-- Content of the profile page -->
@@ -122,8 +121,10 @@
                             <h5 class="card-title mb-0">My Recipes</h5>
                         </div>
                         <div class="card-body">
+                            {% if recettes_user%}
                             <p>Here are the recipes you’ve created:</p>
-
+                            {% endif %}
+                            {%for recette in recettes_user%}
                             <!-- Recipe 1 -->
                             <div class="card mb-3">
                                 <div class="row g-0">
@@ -132,32 +133,15 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Recipe Title 1</h5>
-                                            <p class="card-text">A delicious recipe made with fresh ingredients. This is a quick and easy recipe perfect for lunch.</p>
+                                            <h5 class="card-title">{{recette.title}}</h5>
+                                            <p class="card-text">{{recette.description|truncatewords:10}}</p>
                                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                             <button class="btn btn-outline-dark">View Recipe</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Recipe 2 -->
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="Recipe 2">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Recipe Title 2</h5>
-                                            <p class="card-text">A hearty meal with great flavor. Perfect for a family dinner or a special occasion.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 5 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">View Recipe</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {% endfor %}
                             <button class="btn btn-outline-dark mt-3">Add New Recipe</button>
                         </div>
                     </div>
