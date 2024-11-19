@@ -121,7 +121,9 @@
                             <h5 class="card-title mb-0">My Recipes</h5>
                         </div>
                         <div class="card-body">
+                            {% if recettes_user%}
                             <p>Here are the recipes you’ve created:</p>
+                            {% endif %}
                             {%for recette in recettes_user%}
                             <!-- Recipe 1 -->
                             <div class="card mb-3">
