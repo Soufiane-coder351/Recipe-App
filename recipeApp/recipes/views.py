@@ -15,5 +15,3 @@ def createrecipe(request):
 def recette_info(request):
     return render(request,'recipes/recette_info.html')
 
-def afficher_recettes(request):
-    return render(request, 'index.html', {'tortilla' : tortilla})
