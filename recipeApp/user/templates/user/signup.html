@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Recipe App - Log In</title>
+        <title>Recipe App - Se connecter</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -22,7 +22,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'recipes' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'recipes' %}">Accueil</a></li>
                         
                     </ul>
                 </div>
@@ -37,8 +37,8 @@
                         <div class="card shadow-lg">
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <h2 class="fw-bolder">Sign Up to Recipe App</h2>
-                                    <p class="lead fw-normal text-muted mb-4">Welcome ! Please enter your details to sign up.</p>
+                                    <h2 class="fw-bolder">S'inscrire dans Recipe App</h2>
+                                    <p class="lead fw-normal text-muted mb-4">Bienvenue ! Veuillez entrer vos informations pour vous inscrire.</p>
                                 </div>
                                 <form method="POST">
                                     {% csrf_token %}
@@ -60,10 +60,10 @@
                                         <input name="confirm_password" type="password" class="form-control" id="password" required />
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <button class="btn btn-dark w-100" type="submit">Sign Up</button>
+                                        <button class="btn btn-dark w-100" type="submit">S'inscrire</button>
                                     </div>
                                     <div class="text-center mt-3">
-                                        <p class="small mb-0">Vous avez déjà un compte? <a href="{% url 'login' %}">Log In</a></p>
+                                        <p class="small mb-0">Vous avez déjà un compte? <a href="{% url 'login' %}">Se connecter</a></p>
                                     </div>
                                 </form>
                                 <!-- Display any form errors here -->

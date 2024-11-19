@@ -22,8 +22,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">À propos</a></li>
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -34,7 +34,7 @@
                             </ul>
                         </li> -->
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="#!">Favorites</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Favories</a></li>
                         {% endif %}
                     </ul>
                     <form class="d-flex">
@@ -42,15 +42,15 @@
                         <div class="d-flex align-items-center">
                             <p class="text-dark mb-0 me-3">Bonjour, <span class="fw-bold">{{ user.username }}</span>!</p>
                             <a class="btn btn-outline-dark btn-sm" href="{% url 'profile' %}">
-                                <i class="bi bi-person-fill"></i> User Profile
+                                <i class="bi bi-person-fill"></i> Profile d'utilisateur
                             </a>
                         </div>
                         {% else %}
                             <a href="{% url 'login' %}">
-                                <button class="btn btn-outline-dark me-2" type="button"> Log In </button>
+                                <button class="btn btn-outline-dark me-2" type="button"> Se connecter </button>
                             </a>
                             <a href="{% url 'signup' %}">
-                                <button class="btn btn-outline-dark me-2" type="button"> Sign Up </button>
+                                <button class="btn btn-outline-dark me-2" type="button"> S'inscrire </button>
                             </a>
                         {% endif %}
                     </form>
