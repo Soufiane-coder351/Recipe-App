@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>User Page - Recipe App</title>
+        <title> Page d'utilisateur - Recipe App</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -22,11 +22,11 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'recipes' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'recipes' %}">Accueil</a></li>
                     </ul>
                     <form class="d-flex">
                         <a href="{% url 'logout' %}">
-                            <button class="btn btn-outline-dark me-2" type="button"> Sign Out </button>
+                            <button class="btn btn-outline-dark me-2" type="button"> Se déconnecter </button>
                         </a>
                     </form>
                 </div>
@@ -50,19 +50,19 @@
                 <div class="col-lg-12 mb-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Settings</h5>
+                            <h5 class="card-title mb-0">Paramètres</h5>
                         </div>
                         <div class="card-body">
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <i class="bi bi-person-fill"></i> Profile
-                                    <a href="{% url 'change_name' %}" class="btn btn-link float-end">Edit</a>
+                                    <a href="{% url 'change_name' %}" class="btn btn-link float-end">Modifier</a>
                                 </li>
                                 <!-- Change Password Button -->
                                 <li class="list-group-item">
-                                    <i class="bi bi-lock-fill"></i> Change Password
+                                    <i class="bi bi-lock-fill"></i> Changer le mot de passe 
                                     <!-- Link to open the change password form -->
-                                    <a href="{% url 'change_password' %}" class="btn btn-link float-end">Change Password</a>
+                                    <a href="{% url 'change_password' %}" class="btn btn-link float-end">Changer le mot de passe</a>
                                 </li>
                                 <!-- {% block content %} -->
                                 <!-- Content of the profile page -->
@@ -118,11 +118,11 @@
                 <div class="col-lg-12 mb-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">My Recipes</h5>
+                            <h5 class="card-title mb-0">Mes Recettes</h5>
                         </div>
                         <div class="card-body">
                             {% if recettes_user%}
-                            <p>Here are the recipes you’ve created:</p>
+                            <p>Voici les recettes que vous avez créées:</p>
                             {% endif %}
                             {%for recette in recettes_user%}
                             <!-- Recipe 1 -->
@@ -136,13 +136,13 @@
                                             <h5 class="card-title">{{recette.title}}</h5>
                                             <p class="card-text">{{recette.description|truncatewords:10}}</p>
                                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">View Recipe</button>
+                                            <button class="btn btn-outline-dark">Voir la recette</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {% endfor %}
-                            <button class="btn btn-outline-dark mt-3">Add New Recipe</button>
+                            <button class="btn btn-outline-dark mt-3">Ajouter une recette</button>
                         </div>
                     </div>
                 </div>
@@ -151,10 +151,10 @@
                 <div class="col-lg-12 mb-4">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">My Favorites</h5>
+                            <h5 class="card-title mb-0">Mes favories</h5>
                         </div>
                         <div class="card-body">
-                            <p>Here are your favorite recipes:</p>
+                            <p>Voici vos recettes préférées</p>
 
                             <!-- Favorite Recipe 1 -->
                             <div class="card mb-3">
@@ -164,10 +164,10 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Favorite Recipe 1</h5>
+                                            <h5 class="card-title">Recette préférée 1</h5>
                                             <p class="card-text">A mouth-watering favorite. This recipe will definitely leave you wanting more.</p>
                                             <p class="card-text"><small class="text-muted">Last updated 10 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">View Recipe</button>
+                                            <button class="btn btn-outline-dark">Voir la recette</button>
                                         </div>
                                     </div>
                                 </div>
@@ -181,16 +181,16 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Favorite Recipe 2</h5>
+                                            <h5 class="card-title">Recette préférée 2</h5>
                                             <p class="card-text">A tasty dish that's easy to make and full of flavor. Perfect for any meal.</p>
                                             <p class="card-text"><small class="text-muted">Last updated 20 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">View Recipe</button>
+                                            <button class="btn btn-outline-dark">Voir la recette</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="btn btn-outline-dark mt-3">View All Favorites</button>
+                            <button class="btn btn-outline-dark mt-3">Voir tous les favoris</button>
                         </div>
                     </div>
                 </div>
