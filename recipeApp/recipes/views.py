@@ -20,13 +20,3 @@ def recette_info(request):
 
 def afficher_recettes(request):
     return render(request, 'index.html', {'tortilla' : tortilla})
-
-@login_required
-def afficher_favoris(request):
-    template = loader.get_template("./recipes/favorites.html") #j'anticipe mais il ft que j'ai un fichier html pour les favoris solal s'en charge
-    favoris = Favorites.objects.filter(user=request.user)
-    return HttpResponse(template.render(request=request,context={"favoris":favoris}))
-    
-    
-    
-    
