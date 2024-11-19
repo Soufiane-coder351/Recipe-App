@@ -47,6 +47,6 @@ class Avis(models.Model):
 class Ingredient(models.Model):
     produit = models.ForeignKey(Produit, on_delete = models.CASCADE)
     recette = models.ForeignKey(Recipe, on_delete = models.CASCADE)
-    qté = models.TextField()
+    qtté = models.TextField()
 
 ""
