@@ -13,10 +13,6 @@ from django.contrib import messages
 
 # Create your views here.
 
-def user_info(request):
-    message = 'Name <br> Last Name <br> Birth date <br> E-mail adress <br> Date of registration'
-    return HttpResponse(message)
-
 
 
 def login_view(request):
@@ -26,7 +22,6 @@ def login_view(request):
         password = request.POST.get('password')
         # Initialize an empty list for errors
         errors = []
-        print(email)
         # Authenticate the user using the email (instead of username)
         try:
             # Find the user by email
@@ -37,10 +32,8 @@ def login_view(request):
                 user = authenticate(request, username=user.username, password=password)
             else:
                 user = None
-                print("erro , didn't pass 1")
         except User.DoesNotExist:
             user = None
-            print("eeror, user does not exist")
 
         # If authentication fails, display an error
         if user is None:
