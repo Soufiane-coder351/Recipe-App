@@ -1,11 +1,11 @@
 
 
 from django.db import models
-from django.contrib.auth.models import User
 
 # Create your models here.
 
 
+from django.db import models
 
 # Modèle pour l'ingrédient
 class Produit(models.Model):
@@ -14,7 +14,15 @@ class Produit(models.Model):
     def __str__(self):
         return self.name
 
-#for user the model, we already use the auth_user provided by django, just use : from django.contrib.auth.models import User
+# Modèle pour l'utilisateur (User)
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    username = models.CharField(max_length=100, unique=True)
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.username
 
 # Modèle pour la recette (Recipe)
 class Recipe(models.Model):
@@ -31,7 +39,7 @@ class Avis(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     content = models.TextField()  # Contenu de l'avis
-    rating = models.PositiveIntegerField(default=0)  # Note (optionnelle)
+    rating = models.IntegerField(default=0)  # Note (optionnelle)
 
     def __str__(self):
         return f'Avis de {self.user.username} sur {self.recipe.title}'
@@ -39,6 +47,11 @@ class Avis(models.Model):
 class Ingredient(models.Model):
     produit = models.ForeignKey(Produit, on_delete = models.CASCADE)
     recette = models.ForeignKey(Recipe, on_delete = models.CASCADE)
-    qtté = models.TextField()
+    qté = models.TextField()
 
-""
+
+class Favorites(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recette = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+                             
