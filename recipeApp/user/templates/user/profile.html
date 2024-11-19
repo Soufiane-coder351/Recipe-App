@@ -59,10 +59,57 @@
                                     <i class="bi bi-person-fill"></i> Profile
                                     <button class="btn btn-link float-end">Edit</button>
                                 </li>
+                                <!-- Change Password Button -->
                                 <li class="list-group-item">
                                     <i class="bi bi-lock-fill"></i> Change Password
-                                    <button class="btn btn-link float-end">Change</button>
+                                    <!-- Link to open the change password form -->
+                                    <a href="{% url 'change_password' %}" class="btn btn-link float-end">Change Password please</a>
                                 </li>
+                                <!-- {% block content %} -->
+                                <!-- Content of the profile page -->
+                                <!-- {% endblock %} -->
+                                <!-- Modal for Changing Password -->
+                                <!-- <div class="modal fade {% if errors %}show{% endif %}" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{% url 'change_password' %}">
+                                                    {% csrf_token %}
+
+                                                    {% if errors %}
+                                                    <div class="alert alert-danger">
+                                                        <ul>
+                                                            {% for error in errors %}
+                                                            <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    <div class="mb-3">
+                                                        <label for="oldPassword" class="form-label">Old Password</label>
+                                                        <input type="password" class="form-control" id="oldPassword" name="old_password" value="{{ old_password }}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="newPassword" class="form-label">New Password</label>
+                                                        <input type="password" class="form-control" id="newPassword" name="new_password1" value="{{ new_password1 }}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                                        <input type="password" class="form-control" id="confirmPassword" name="new_password2" value="{{ new_password2 }}" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+ -->
+
                             </ul>
                         </div>
                     </div>

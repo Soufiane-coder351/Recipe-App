@@ -2,9 +2,10 @@ from django.http import HttpResponse
 # from django.template import loader
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth import authenticate,login, logout,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 
 
 # Create your views here.
@@ -101,6 +102,47 @@ def signup_view(request):
 @login_required
 def profile_view(request):
     return render(request, 'user/profile.html')
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        old_password = request.POST.get('old_password')
+        new_password1 = request.POST.get('new_password1')
+        new_password2 = request.POST.get('new_password2')
+
+        # Initialize an empty list for errors
+        errors = []
+
+        # Check if the old password is correct
+        if not request.user.check_password(old_password):
+            errors.append("Le mot de passe actuel est incorrect.")
+
+        # Validate that the new passwords match
+        if new_password1 != new_password2:
+            errors.append("Les nouveaux mots de passe ne correspondent pas.")
+
+        # Validate the length of the new password
+        if len(new_password1) < 8:
+            errors.append("The new password must be at least 8 characters long.")
+
+        # If there are no errors, update the password
+        if not errors:
+            try:
+                # Save the new password
+                request.user.set_password(new_password1)
+                request.user.save()
+
+                # Keep the user logged in
+                update_session_auth_hash(request, request.user)
+
+                return redirect('profile')  # Redirect to the profile page after success
+            except Exception as e:
+                errors.append(str(e))
+
+        # If there are errors, render the form again with errors
+        return render(request, 'user/change_password.html', {'errors': errors})
+    return render(request, 'user/change_password.html')
 
 
 def logout_view(request):
