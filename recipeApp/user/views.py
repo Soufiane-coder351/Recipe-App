@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate,login, logout,update_session_auth_h
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from recipes.models import Recipe
+from django.contrib import messages
+
 
 
 
@@ -150,3 +152,20 @@ def change_password(request):
 def logout_view(request):
     logout(request)  # Log the user out
     return redirect('recipes') 
+
+
+@login_required
+def change_name(request):
+    if request.method == 'POST':
+        new_name = request.POST.get('new_name')
+
+        # Mise à jour du prénom
+        request.user.username = new_name
+        request.user.save()
+
+        # Affichage d'un message de succès
+        messages.success(request, "Votre nom a été changé avec succès.")
+        return redirect('profile')  # Redirection après succès
+
+    # Rendre le template pour la requête GET
+    return render(request, 'user/change_name.html')
