@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login, logout,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 
@@ -148,3 +149,18 @@ def change_password(request):
 def logout_view(request):
     logout(request)  # Log the user out
     return redirect('recipes') 
+
+
+@login_required
+def change_name(request):
+    if request.method == 'POST':
+        new_name = request.POST.get('new_name')
+
+        # Changer directement le nom sans vérification d'erreurs
+        request.user.first_name = new_name
+        request.user.save()
+        # Afficher un message de succès
+        messages.success(request, "Votre nom a été changé avec succès.")
+        return redirect('profile')  # Rediriger vers la page de profil après succès
+
+    return redirect('profile')  # Rediriger si ce n'est pas une requête POST
