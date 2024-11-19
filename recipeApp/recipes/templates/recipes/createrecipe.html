@@ -1,164 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Recipe</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Créer une Recette</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="font-sans bg-gray-100 text-gray-800">
 
-<!-- Navigation Bar with Dark Background -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">RecipeApp</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
-            </ul>
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-semibold text-white">RecipeApp</a>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white hover:bg-gray-700 px-4 py-2 rounded-lg">Accueil</a>
+                <a href="#" class="text-white hover:bg-gray-700 px-4 py-2 rounded-lg">À propos</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- Recipe Creation Form -->
-<div class="container my-5">
-    <h2 class="mb-4">Create a New Recipe</h2>
-    <form>
-        <!-- Recipe Title -->
-        <div class="mb-3">
-            <label for="recipeTitle" class="form-label">Recipe Title</label>
-            <input type="text" class="form-control" id="recipeTitle" placeholder="Enter recipe title" required>
-        </div>
-
-        <!-- Recipe Description -->
-        <div class="mb-3">
-            <label for="recipeDescription" class="form-label">Recipe Description</label>
-            <textarea class="form-control" id="recipeDescription" rows="3" placeholder="Enter recipe description" required></textarea>
-        </div>
-
-        <!-- Category and Ingredients in the Same Row -->
-        <div class="row mb-3">
-            <!-- Category -->
-            <div class="col-md-6">
-                <label for="recipeCategory" class="form-label">Category</label>
-                <div class="btn-group d-flex" role="group" aria-label="Category Selection">
-                    <button type="button" class="btn btn-outline-secondary w-100" id="breakfastBtn">Breakfast</button>
-                    <button type="button" class="btn btn-outline-secondary w-100" id="lunchBtn">Lunch</button>
-                    <button type="button" class="btn btn-outline-secondary w-100" id="dinnerBtn">Dinner</button>
-                </div>
+    <!-- Recipe Creation Form -->
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Créer une Nouvelle Recette</h2>
+        
+        <form class="bg-white p-6 rounded-lg shadow-md">
+            <!-- Recipe Title -->
+            <div class="mb-4">
+                <label for="recipeTitle" class="block text-gray-700 text-lg font-medium">Titre de la Recette</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="recipeTitle" placeholder="Entrez le titre de la recette" required>
             </div>
 
-            <!-- Ingredients -->
-            <div class="col-md-6">
-                <label for="recipeIngredients" class="form-label">Ingredients</label>
-                <div id="ingredientsContainer">
-                    <div class="d-flex mb-2">
-                        <input type="text" class="form-control me-2" id="ingredientInput" placeholder="Enter ingredient" />
-                        <button type="button" class="btn btn-success" id="addIngredientBtn">Add</button>
+            <!-- Recipe Description -->
+            <div class="mb-4">
+                <label for="recipeDescription" class="block text-gray-700 text-lg font-medium">Description de la Recette</label>
+                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="recipeDescription" rows="4" placeholder="Entrez la description de la recette" required></textarea>
+            </div>
+
+            <!-- Category and Ingredients -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <!-- Category -->
+                <div>
+                    <label for="recipeCategory" class="block text-gray-700 text-lg font-medium">Catégorie</label>
+                    <div class="flex space-x-2">
+                        <button type="button" class="category-btn w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-gray-500" onclick="setActiveCategory(this)">Petit-déjeuner</button>
+                        <button type="button" class="category-btn w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-gray-500" onclick="setActiveCategory(this)">Déjeuner</button>
+                        <button type="button" class="category-btn w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-gray-500" onclick="setActiveCategory(this)">Dîner</button>
                     </div>
-                    <div id="ingredientsList" class="d-flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- Ingredients -->
+                <div>
+                    <label for="recipeIngredients" class="block text-gray-700 text-lg font-medium">Ingrédients</label>
+                    <div id="ingredientsContainer">
+                        <div class="flex mb-2">
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-l-lg bg-gray-50 text-gray-800" id="ingredientInput" placeholder="Entrez un ingrédient" />
+                            <button type="button" class="w-16 px-4 py-2 bg-teal-500 text-white rounded-r-lg" id="addIngredientBtn">Ajouter</button>
+                        </div>
+                        <div id="ingredientsList" class="flex flex-wrap gap-2"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Instructions -->
-        <div class="mb-3">
-            <label for="recipeInstructions" class="form-label">Instructions</label>
-            <textarea class="form-control" id="recipeInstructions" rows="6" placeholder="Enter step-by-step instructions" required></textarea>
-        </div>
-
-        <!-- Step-by-step Instructions with Images -->
-        <h4 class="mb-3">Step-by-Step Instructions</h4>
-        <div id="stepsContainer">
-            <div class="mb-3 step">
-                <label for="stepDescription1" class="form-label">Step 1 Description</label>
-                <input type="text" class="form-control" id="stepDescription1" placeholder="Enter step description">
-                
-                <label for="stepImage1" class="form-label mt-2">Step 1 Image</label>
-                <input type="file" class="form-control" id="stepImage1" accept="image/*">
+            <!-- Instructions -->
+            <div class="mb-4">
+                <label for="recipeInstructions" class="block text-gray-700 text-lg font-medium">Instructions</label>
+                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="recipeInstructions" rows="6" placeholder="Entrez les instructions étape par étape" required></textarea>
             </div>
-        </div>
 
-        <button type="button" class="btn btn-link" onclick="addStep()">Add Another Step</button>
+            <!-- Step-by-step Instructions with Images -->
+            <h4 class="text-xl font-semibold text-gray-700 mb-4">Instructions étape par étape</h4>
+            <div id="stepsContainer">
+                <div class="mb-4 step">
+                    <label for="stepDescription1" class="block text-gray-700 text-lg font-medium">Étape 1 - Description</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepDescription1" placeholder="Entrez la description de l'étape">
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mt-6">Create Recipe</button>
-    </form>
-</div>
+                    <label for="stepImage1" class="block text-gray-700 text-lg font-medium mt-2">Image de l'étape 1</label>
+                    <input type="file" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepImage1" accept="image/*">
+                </div>
+            </div>
 
-<!-- Footer -->
-<footer class="py-5 bg-dark text-white text-center">
-    <div class="container">
-        <p class="m-0">Copyright &copy; RecipeApp 2023</p>
+            <button type="button" class="text-teal-600 hover:underline" onclick="addStep()">Ajouter une autre étape</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-gray-600 text-white py-2 rounded-lg mt-6">Créer la Recette</button>
+        </form>
     </div>
-</footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center py-4">
+        <p>&copy; RecipeApp 2023. Tous droits réservés.</p>
+    </footer>
 
-<!-- Script to add steps and ingredients dynamically -->
-<script>
-    let stepCount = 1;
+    <!-- Script to add steps and ingredients dynamically -->
+    <script>
+        let stepCount = 1;
 
-    // Function to add a new step
-    function addStep() {
-        stepCount++;
-        const stepsContainer = document.getElementById('stepsContainer');
-        const newStep = document.createElement('div');
-        newStep.classList.add('mb-3', 'step');
-        newStep.innerHTML = `
-            <label for="stepDescription${stepCount}" class="form-label">Step ${stepCount} Description</label>
-            <input type="text" class="form-control" id="stepDescription${stepCount}" placeholder="Enter step description">
-            
-            <label for="stepImage${stepCount}" class="form-label mt-2">Step ${stepCount} Image</label>
-            <input type="file" class="form-control" id="stepImage${stepCount}" accept="image/*">
-        `;
-        stepsContainer.appendChild(newStep);
-    }
+        // Function to add a new step
+        function addStep() {
+            stepCount++;
+            const stepsContainer = document.getElementById('stepsContainer');
+            const newStep = document.createElement('div');
+            newStep.classList.add('mb-4', 'step');
+            newStep.innerHTML = `
+                <label for="stepDescription${stepCount}" class="block text-gray-700 text-lg font-medium">Étape ${stepCount} - Description</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepDescription${stepCount}" placeholder="Entrez la description de l'étape">
 
-    // Ingredient handling logic
-    const addIngredientBtn = document.getElementById('addIngredientBtn');
-    const ingredientInput = document.getElementById('ingredientInput');
-    const ingredientsList = document.getElementById('ingredientsList');
-
-    addIngredientBtn.addEventListener('click', function() {
-        const ingredientValue = ingredientInput.value.trim();
-        if (ingredientValue) {
-            const tag = document.createElement('span');
-            tag.classList.add('badge', 'bg-secondary', 'text-light', 'p-2');  // Lighter background color with darker text
-            tag.textContent = ingredientValue;
-
-            // Add remove button for the tag
-            const removeBtn = document.createElement('button');
-            removeBtn.textContent = 'X';
-            removeBtn.classList.add('btn-close', 'btn-sm', 'ms-2');
-            removeBtn.onclick = function() {
-                ingredientsList.removeChild(tag);
-            };
-
-            tag.appendChild(removeBtn);
-            ingredientsList.appendChild(tag);
-            ingredientInput.value = ''; // Clear the input after adding
+                <label for="stepImage${stepCount}" class="block text-gray-700 text-lg font-medium mt-2">Image de l'étape ${stepCount}</label>
+                <input type="file" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepImage${stepCount}" accept="image/*">
+            `;
+            stepsContainer.appendChild(newStep);
         }
-    });
 
-    // Category selection logic
-    const categoryButtons = document.querySelectorAll('.btn-group .btn');
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            categoryButtons.forEach(btn => btn.classList.remove('active', 'btn-secondary', 'text-white'));
+        // Ingredient handling logic
+        const addIngredientBtn = document.getElementById('addIngredientBtn');
+        const ingredientInput = document.getElementById('ingredientInput');
+        const ingredientsList = document.getElementById('ingredientsList');
 
-            // Add active class to the clicked button
-            button.classList.add('active', 'btn-secondary', 'text-white');
+        addIngredientBtn.addEventListener('click', function() {
+            const ingredientValue = ingredientInput.value.trim();
+            if (ingredientValue) {
+                const tag = document.createElement('span');
+                tag.classList.add('bg-teal-500', 'text-white', 'px-4', 'py-2', 'rounded-lg');
+                tag.textContent = ingredientValue;
+
+                // Add remove button for the tag
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'X';
+                removeBtn.classList.add('text-white', 'ml-2');
+                removeBtn.onclick = function() {
+                    ingredientsList.removeChild(tag);
+                };
+
+                tag.appendChild(removeBtn);
+                ingredientsList.appendChild(tag);
+                ingredientInput.value = ''; // Clear the input after adding
+            }
         });
-    });
-</script>
+
+        // Function to set active category
+        function setActiveCategory(button) {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-gray-500'); // Remove active state
+            });
+            button.classList.add('bg-gray-500'); // Add active state to the clicked button
+        }
+    </script>
 
 </body>
 </html>

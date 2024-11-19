@@ -1,96 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Recipe App - Se connecter</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        {% load static %}
-        <link href="{% static 'recipes/css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Recipe App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'recipes' %}">Accueil</a></li>
-                        
-                    </ul>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Recipe App - S'inscrire</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="bg-gray-900">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="{% url 'recipes' %}" class="text-2xl font-bold text-white">Recipe App</a>
+            <div>
+                <a href="{% url 'recipes' %}" class="text-gray-300 hover:text-white">Accueil</a>
             </div>
-        </nav>
-        
-        <!-- Log In Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="card shadow-lg">
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <h2 class="fw-bolder">S'inscrire dans Recipe App</h2>
-                                    <p class="lead fw-normal text-muted mb-4">Bienvenue ! Veuillez entrer vos informations pour vous inscrire.</p>
-                                </div>
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <!-- {{ form.as_p }}  Render the Django form -->
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Nom</label>
-                                        <input name="username" type="text" class="form-control" id="email" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Adresse email</label>
-                                        <input name="email" type="email" class="form-control" id="email" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Mot de passe</label>
-                                        <input name="password" type="password" class="form-control" id="password" required />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="confirm_password" class="form-label">Confirmez votre mot de passe</label>
-                                        <input name="confirm_password" type="password" class="form-control" id="password" required />
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <button class="btn btn-dark w-100" type="submit">S'inscrire</button>
-                                    </div>
-                                    <div class="text-center mt-3">
-                                        <p class="small mb-0">Vous avez déjà un compte? <a href="{% url 'login' %}">Se connecter</a></p>
-                                    </div>
-                                </form>
-                                <!-- Display any form errors here -->
-                                {% if errors %}
-                                <div class="alert alert-danger mt-3">
-                                    <ul>
-                                        {% for error in errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
+        </div>
+    </nav>
+    
+    <!-- Sign Up Section -->
+    <section class="flex items-center justify-center min-h-screen">
+        <div class="container mx-auto max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
+            <!-- Form Section -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+                <div class="text-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">S'inscrire</h2>
+                    <p class="text-gray-600 mt-2">Bienvenue ! Entrez vos informations pour vous inscrire.</p>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="username" class="block text-sm font-medium text-gray-700">Nom</label>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            placeholder="Entrez votre nom" 
+                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm" 
+                            required 
+                        />
                     </div>
-                </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Adresse email</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            placeholder="Entrez votre adresse email" 
+                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm" 
+                            required 
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            placeholder="Choisissez un mot de passe" 
+                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm" 
+                            required 
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirmez le mot de passe</label>
+                        <input 
+                            type="password" 
+                            name="confirm_password" 
+                            placeholder="Confirmez votre mot de passe" 
+                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm" 
+                            required 
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-teal-500 text-white py-2 text-sm rounded-lg shadow-md hover:bg-teal-600 transition"
+                        >
+                            S'inscrire
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">
+                            Vous avez déjà un compte ? 
+                            <a href="{% url 'login' %}" class="text-teal-500 hover:underline">Se connecter</a>
+                        </p>
+                    </div>
+                </form>
             </div>
-        </section>
 
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Recipe App 2023</p></div>
-        </footer>
+            <!-- Right: Dark Section -->
+            <div class="w-full md:w-1/2 bg-teal-800 flex items-center justify-center">
+                <p class="text-white text-lg font-medium">Rejoignez notre communauté aujourd'hui !</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'recipes/js/scripts.js' %}"></script>
-    </body>
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-4">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; Recipe App 2023. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
 </html>
