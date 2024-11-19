@@ -34,7 +34,7 @@
                             </ul>
                         </li> -->
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="#!">Favorites</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'recettes_favorites' %}">Favorites</a></li>
                         {% endif %}
                     </ul>
                     <form class="d-flex">
