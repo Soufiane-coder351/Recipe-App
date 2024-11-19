@@ -156,11 +156,13 @@ def change_name(request):
     if request.method == 'POST':
         new_name = request.POST.get('new_name')
 
-        # Changer directement le nom sans vérification d'erreurs
-        request.user.first_name = new_name
+        # Mise à jour du prénom
+        request.user.username = new_name
         request.user.save()
-        # Afficher un message de succès
-        messages.success(request, "Votre nom a été changé avec succès.")
-        return redirect('profile')  # Rediriger vers la page de profil après succès
 
-    return redirect('profile')  # Rediriger si ce n'est pas une requête POST
+        # Affichage d'un message de succès
+        messages.success(request, "Votre nom a été changé avec succès.")
+        return redirect('profile')  # Redirection après succès
+
+    # Rendre le template pour la requête GET
+    return render(request, 'user/change_name.html')
