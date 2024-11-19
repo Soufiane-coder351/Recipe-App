@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Recipe Details - Recipe App</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    {% load static %}
+    <link href="{% static 'recipes/css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!">Recipe App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'recipes' %}">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Spaghetti Carbonara</h1>
+                <p class="lead fw-normal text-white-50 mb-0">A classic Italian pasta dish with creamy sauce. Delicious and comforting!</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content-->
+    <div class="container px-4 px-lg-5 py-5">
+        <div class="row">
+            <!-- Recipe Details-->
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="Spaghetti Carbonara" />
+                    <div class="card-body">
+                        <h5 class="card-title">Ingredients</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-check-circle text-success"></i> 200g spaghetti</li>
+                                    <li><i class="bi bi-check-circle text-success"></i> 100g pancetta</li>
+                                    <li><i class="bi bi-check-circle text-success"></i> 2 large eggs</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-check-circle text-success"></i> 50g pecorino cheese</li>
+                                    <li><i class="bi bi-check-circle text-success"></i> Freshly ground black pepper</li>
+                                    <li><i class="bi bi-check-circle text-success"></i> Salt</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+                        <h5>Instructions</h5>
+                        <div class="steps">
+                            <div class="step">
+                                <h6><i class="bi bi-clock"></i> Step 1</h6>
+                                <p>Cook the spaghetti in salted boiling water until al dente.</p>
+                            </div>
+                            <div class="step">
+                                <h6><i class="bi bi-clock"></i> Step 2</h6>
+                                <p>Fry the pancetta until crispy.</p>
+                            </div>
+                            <div class="step">
+                                <h6><i class="bi bi-clock"></i> Step 3</h6>
+                                <p>Beat the eggs and mix with grated pecorino cheese.</p>
+                            </div>
+                            <div class="step">
+                                <h6><i class="bi bi-clock"></i> Step 4</h6>
+                                <p>Combine everything and mix well. Serve hot.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">User Reviews</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Review 1 -->
+                        <div class="review-card mb-4">
+                            <h6 class="fw-bold">John Doe</h6>
+                            <div class="d-flex justify-content-start mb-2">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-muted"></i>
+                            </div>
+                            <p>Amazing recipe! The flavors were perfect, and it was so easy to make.</p>
+                            <small class="text-muted">Posted on Nov 15, 2024</small>
+                            <hr />
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="review-card mb-4">
+                            <h6 class="fw-bold">Jane Smith</h6>
+                            <div class="d-flex justify-content-start mb-2">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-muted"></i>
+                                <i class="bi bi-star-fill text-muted"></i>
+                            </div>
+                            <p>Good, but I prefer adding a bit of garlic for extra flavor.</p>
+                            <small class="text-muted">Posted on Nov 16, 2024</small>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Review -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Leave a Review</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Rating</label>
+                                <select class="form-select" id="rating">
+                                    <option value="5">5 - Excellent</option>
+                                    <option value="4">4 - Very Good</option>
+                                    <option value="3">3 - Good</option>
+                                    <option value="2">2 - Fair</option>
+                                    <option value="1">1 - Poor</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comment" class="form-label">Comment</label>
+                                <textarea class="form-control" id="comment" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Recipe App 2023</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
