@@ -25,6 +25,7 @@ def createrecipe(request):
         title = request.POST.get('title')
         description = request.POST.get('description')
         instructions = request.POST.get('instructions')
+        image = request.FILES.get('image')
         user = request.user
         
         errors = []
@@ -34,7 +35,7 @@ def createrecipe(request):
         
         if not errors:
             try:
-                recipe = Recipe.objects.create(title=title,description=description,instructions=instructions,user=user)
+                recipe = Recipe.objects.create(title=title,description=description,instructions=instructions,user=user,image=image)
                 recipe.save()
                 return redirect('profile')
 
