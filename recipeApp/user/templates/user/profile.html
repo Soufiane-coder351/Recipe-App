@@ -71,16 +71,21 @@
                     <p class="text-gray-600 mb-4">Voici les recettes que vous avez créées :</p>
                     <div class="space-y-4 mt-4" style="max-height: 400px; overflow-y: auto;">
                         {% for recette in recettes_user %}
-                            <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
-                                <div class="w-1/3">
-                                    <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
-                                </div>
-                                <div class="ml-4 w-2/3">
-                                    <h3 class="text-xl font-semibold text-gray-800">{{ recette.title }}</h3>
-                                    <p class="text-gray-600">{{ recette.description|truncatewords:10 }}</p>
-                                    <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
-                                </div>
+                        <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
+                            <div class="w-1/3">
+                                <img src="../../../recipes_photos/{{recette.image }}" 
+                                    class="w-full h-[150px] object-cover rounded-lg" 
+                                    onerror="this.onerror=null; this.src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg';">
                             </div>
+                            <div class="ml-4 w-2/3">
+                                <h3 class="text-xl font-semibold text-gray-800">{{ recette.title }}</h3>
+                                <p class="text-gray-600">{{ recette.description|truncatewords:10 }}</p>
+                                <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
+                                    <a href="{% url 'recette_info' recette.title %}">Voir la recette</a>
+                                </button>
+                            </div>
+                        </div>
+                        
                         {% empty %}
                             <p class="text-center text-gray-700">Aucune recette favoris trouvée.</p>
                         {% endfor %}
@@ -103,13 +108,15 @@
                     {% for fav in recettesfav %}
                         <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
                             <div class="w-1/3">
-                                <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
+                                <img src="../../../recipes_photos/{{fav.recette.image }}" 
+                                    class="w-full h-[150px] object-cover rounded-lg" 
+                                    onerror="this.onerror=null; this.src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg';">
                             </div>
                             <div class="ml-4 w-2/3">
                                 <h3 class="text-xl font-semibold text-gray-800">{{ fav.recette.title }}</h3>
                                 <p class="text-gray-600">{{ fav.recette.description|truncatewords:10 }}</p>
                                 <!-- <p class="text-sm text-gray-500 mt-1">Dernière modification : 10 min</p> -->
-                                <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
+                                <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600"><a href="{% url 'recette_info' fav.recette.title %}">Voir la recette</a></button>
                             </div>
                         </div>
                     {% empty %}

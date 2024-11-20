@@ -31,9 +31,22 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Recipe Details (Span 2 Columns) -->
             <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
-                <img src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="Spaghetti Carbonara" class="rounded-lg mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ recette.title }}</h2>
-
+                <img src="../../../recipes_photos/{{recette.image }}" 
+                class="w-full h-[400px] object-cover rounded-lg" 
+                onerror="this.onerror=null; this.src='https://dummyimage.com/900x400/ced4da/6c757d.jpg';">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ingredients</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <ul class="list-disc list-inside">
+                        <li>200g spaghetti</li>
+                        <li>100g pancetta</li>
+                        <li>2 large eggs</li>
+                    </ul>
+                    <ul class="list-disc list-inside">
+                        <li>50g pecorino cheese</li>
+                        <li>Freshly ground black pepper</li>
+                        <li>Salt</li>
+                    </ul>
+                </div>
                 <!-- Bouton Ajouter/Retirer des Favoris -->
                 {% if user.is_authenticated %}
                     <form method="post" action="{% url 'toggle_favorite' recette.id %}">
@@ -57,23 +70,6 @@
                 {% endif %}
 
                 <!-- Fin du bouton -->
-
-                <p class="text-lg mt-4 text-gray-600">{{ recette.description }}</p>
-
-                <hr class="my-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ingredients</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <ul class="list-disc list-inside">
-                        <li>200g spaghetti</li>
-                        <li>100g pancetta</li>
-                        <li>2 large eggs</li>
-                    </ul>
-                    <ul class="list-disc list-inside">
-                        <li>50g pecorino cheese</li>
-                        <li>Freshly ground black pepper</li>
-                        <li>Salt</li>
-                    </ul>
-                </div>
                 <hr class="my-6">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Instructions</h2>
                 <div class="space-y-4">
