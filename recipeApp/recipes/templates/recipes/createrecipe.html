@@ -22,25 +22,34 @@
     <!-- Recipe Creation Form -->
     <div class="container mx-auto px-4 py-8">
         <h2 class="text-3xl font-semibold text-gray-900 mb-6">Créer une Nouvelle Recette</h2>
-        
-        <form class="bg-white p-6 rounded-lg shadow-md">
+        {% if errors %}
+            <div class="mt-4 bg-red-50 border border-red-200 text-red-600 p-3 rounded-lg">
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form class="bg-white p-6 rounded-lg shadow-md" method="post">
+            {% csrf_token %}
             <!-- Recipe Title -->
             <div class="mb-4">
-                <label for="recipeTitle" class="block text-gray-700 text-lg font-medium">Titre de la Recette</label>
-                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="recipeTitle" placeholder="Entrez le titre de la recette" required>
+                <label for="title" class="block text-gray-700 text-lg font-medium">Titre de la Recette</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="title" name="title" placeholder="Entrez le titre de la recette" required>
             </div>
 
             <!-- Recipe Description -->
             <div class="mb-4">
-                <label for="recipeDescription" class="block text-gray-700 text-lg font-medium">Description de la Recette</label>
-                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="recipeDescription" rows="4" placeholder="Entrez la description de la recette" required></textarea>
+                <label for="description" class="block text-gray-700 text-lg font-medium">Description de la Recette</label>
+                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="description" name="description" rows="4" placeholder="Entrez la description de la recette" required></textarea>
             </div>
 
             <!-- Category and Ingredients -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <!-- Category -->
                 <div>
-                    <label for="recipeCategory" class="block text-gray-700 text-lg font-medium">Catégorie</label>
+                    <label for="categorie" class="block text-gray-700 text-lg font-medium">Catégorie</label>
                     <div class="flex space-x-2">
                         <button type="button" class="category-btn w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-gray-500" onclick="setActiveCategory(this)">Petit-déjeuner</button>
                         <button type="button" class="category-btn w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-gray-500" onclick="setActiveCategory(this)">Déjeuner</button>
@@ -63,8 +72,8 @@
 
             <!-- Instructions -->
             <div class="mb-4">
-                <label for="recipeInstructions" class="block text-gray-700 text-lg font-medium">Instructions</label>
-                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="recipeInstructions" rows="6" placeholder="Entrez les instructions étape par étape" required></textarea>
+                <label for="instructions" class="block text-gray-700 text-lg font-medium">Instructions</label>
+                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="instructions" name="instructions" rows="6" placeholder="Entrez les instructions étape par étape" required></textarea>
             </div>
 
             <!-- Step-by-step Instructions with Images -->
