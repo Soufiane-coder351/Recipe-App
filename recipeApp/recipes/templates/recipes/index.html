@@ -1,128 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        {% load static %}
-        <link href="{% static 'recipes/css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Recipe App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">À propos</a></li>
-                        <!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li> -->
-                        {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'recettes_favorites' %}">Favorites</a></li>
-                        {% endif %}
-                    </ul>
-                    <form class="d-flex">
-                        {% if user.is_authenticated %}
-                        <div class="d-flex align-items-center">
-                            <p class="text-dark mb-0 me-3">Bonjour, <span class="fw-bold">{{ user.username }}</span>!</p>
-                            <a class="btn btn-outline-dark btn-sm" href="{% url 'profile' %}">
-                                <i class="bi bi-person-fill"></i> Profile d'utilisateur
-                            </a>
-                        </div>
-                        {% else %}
-                            <a href="{% url 'login' %}">
-                                <button class="btn btn-outline-dark me-2" type="button"> Se connecter </button>
-                            </a>
-                            <a href="{% url 'signup' %}">
-                                <button class="btn btn-outline-dark me-2" type="button"> S'inscrire </button>
-                            </a>
-                        {% endif %}
-                    </form>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Bienvenue dans RecipeApp</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Explorez les meilleures recettes pour chaque occasion !</p>
-                </div>
-            </div>
-        </header>
-        <!-- Search Bar Section -->
-        <section class="search-bar mt-5"> <!-- Adds equal spacing above and below -->
-            <div class="container px-4 px-lg-5">
-                <div class="input-group input-group-lg">
-                    <input class="form-control" type="text" placeholder="Rechercher une recette..." aria-label="Search" />
-                    <button class="btn btn-outline-dark" type="button">Rechercher</button>
-                </div>
-            </div>
-        </section>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    
-                   
-                {%for recette in recettes%}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{recette.title}}</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    {{recette.description|truncatewords:10}}
-                                </div>
-                            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Recipe App</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Left side -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-2xl font-semibold text-teal-600">Recipe App</a>
+                <a href="#" class="text-gray-700 hover:text-teal-600">À propos</a>
+                {% if user.is_authenticated %}
+                <a class="text-gray-700 hover:text-teal-600" href="{% url 'recettes_favorites' %}">Favoris</a>
+                {% endif %}
 
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Découvrez la recette</a></div>
-                            </div>
-                        </div>
-                    </div>
-                
-                {% endfor %}
-                    
-                </div>
             </div>
-        </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'recipes/js/scripts.js' %}"></script>
-    </body>
+            <!-- Right side -->
+            <div class="flex items-center space-x-4">
+                {% if user.is_authenticated %}
+                    <p class="text-gray-700">Bonjour, <span class="font-bold">{{ user.username }}</span></p>
+                    <a href="{% url 'profile' %}" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 rounded-lg">Profile</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="bg-gray-800 text-white hover:bg-gray-900 px-4 py-2 rounded-lg">Se connecter</a>
+                    <a href="{% url 'signup' %}" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 rounded-lg">S'inscrire</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="bg-gray-900 py-16">
+        <div class="container mx-auto text-center text-white">
+            <h1 class="text-4xl font-bold">Bienvenue dans RecipeApp</h1>
+            <p class="text-lg mt-4 text-gray-400">Explorez les meilleures recettes pour chaque occasion !</p>
+        </div>
+    </header>
+    <!-- Search Bar -->
+    <section class="mt-8">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center">
+                <input type="text" placeholder="Rechercher une recette..." class="flex-1 border border-gray-300 p-3 rounded-l-lg focus:outline-none">
+                <button class="bg-teal-500 text-white hover:bg-teal-600 px-6 py-3 rounded-r-lg">Rechercher</button>
+            </div>
+        </div>
+    </section>
+    <!-- Recipes Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {% for recette in recettes %}
+                <div class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
+                    <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="{{ recette.title }}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h2 class="text-xl font-semibold text-gray-800">{{ recette.title }}</h2>
+                        <p class="text-gray-600 mt-2">{{ recette.description|truncatewords:10 }}</p>
+                    </div>
+                    <div class="p-4 bg-gray-50">
+                        <a href="#" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 block text-center rounded-lg">Découvrez la recette</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-6">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; Recipe App 2023. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
 </html>

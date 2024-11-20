@@ -1,164 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Recipe Details - Recipe App</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    {% load static %}
-    <link href="{% static 'recipes/css/styles.css' %}" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">Recipe App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'recipes' %}">Home</a></li>
-                </ul>
+<body class="font-sans antialiased bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="{% url 'recipes' %}" class="text-2xl font-semibold text-teal-600">Recipe App</a>
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'recipes' %}" class="text-teal-600 hover:underline">Home</a>
             </div>
         </div>
     </nav>
 
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Spaghetti Carbonara</h1>
-                <p class="lead fw-normal text-white-50 mb-0">A classic Italian pasta dish with creamy sauce. Delicious and comforting!</p>
-            </div>
+    <!-- Header -->
+    <header class="bg-gray-900 py-16">
+        <div class="container mx-auto text-center text-white">
+            <h1 class="text-4xl font-bold">Spaghetti Carbonara</h1>
+            <p class="text-lg mt-4 text-gray-400">A classic Italian pasta dish with creamy sauce. Delicious and comforting!</p>
         </div>
     </header>
 
-    <!-- Main Content-->
-    <div class="container px-4 px-lg-5 py-5">
-        <div class="row">
-            <!-- Recipe Details-->
-            <div class="col-lg-8">
-                <div class="card mb-4">
-                    <img class="card-img-top" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="Spaghetti Carbonara" />
-                    <div class="card-body">
-                        <h5 class="card-title">Ingredients</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> 200g spaghetti</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> 100g pancetta</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> 2 large eggs</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> 50g pecorino cheese</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Freshly ground black pepper</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Salt</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <hr />
-                        <h5>Instructions</h5>
-                        <div class="steps">
-                            <div class="step">
-                                <h6><i class="bi bi-clock"></i> Step 1</h6>
-                                <p>Cook the spaghetti in salted boiling water until al dente.</p>
-                            </div>
-                            <div class="step">
-                                <h6><i class="bi bi-clock"></i> Step 2</h6>
-                                <p>Fry the pancetta until crispy.</p>
-                            </div>
-                            <div class="step">
-                                <h6><i class="bi bi-clock"></i> Step 3</h6>
-                                <p>Beat the eggs and mix with grated pecorino cheese.</p>
-                            </div>
-                            <div class="step">
-                                <h6><i class="bi bi-clock"></i> Step 4</h6>
-                                <p>Combine everything and mix well. Serve hot.</p>
-                            </div>
-                        </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Recipe Details (Span 2 Columns) -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                <img src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="Spaghetti Carbonara" class="rounded-lg mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ingredients</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <ul class="list-disc list-inside">
+                        <li>200g spaghetti</li>
+                        <li>100g pancetta</li>
+                        <li>2 large eggs</li>
+                    </ul>
+                    <ul class="list-disc list-inside">
+                        <li>50g pecorino cheese</li>
+                        <li>Freshly ground black pepper</li>
+                        <li>Salt</li>
+                    </ul>
+                </div>
+                <hr class="my-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Instructions</h2>
+                <div class="space-y-4">
+                    <div>
+                        <h6 class="text-lg font-bold">Step 1</h6>
+                        <p>Cook the spaghetti in salted boiling water until al dente.</p>
+                    </div>
+                    <div>
+                        <h6 class="text-lg font-bold">Step 2</h6>
+                        <p>Fry the pancetta until crispy.</p>
+                    </div>
+                    <div>
+                        <h6 class="text-lg font-bold">Step 3</h6>
+                        <p>Beat the eggs and mix with grated pecorino cheese.</p>
+                    </div>
+                    <div>
+                        <h6 class="text-lg font-bold">Step 4</h6>
+                        <p>Combine everything and mix well. Serve hot.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Reviews Section -->
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">User Reviews</h5>
-                    </div>
-                    <div class="card-body">
+            <!-- Reviews and Review Form -->
+            <div>
+                <!-- User Reviews -->
+                <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">User Reviews</h2>
+                    <div class="space-y-6">
                         <!-- Review 1 -->
-                        <div class="review-card mb-4">
-                            <h6 class="fw-bold">John Doe</h6>
-                            <div class="d-flex justify-content-start mb-2">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-muted"></i>
+                        <div>
+                            <h6 class="font-bold text-gray-800">John Doe</h6>
+                            <div class="flex space-x-1 text-yellow-500">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star text-gray-300"></i>
                             </div>
-                            <p>Amazing recipe! The flavors were perfect, and it was so easy to make.</p>
-                            <small class="text-muted">Posted on Nov 15, 2024</small>
-                            <hr />
+                            <p class="text-gray-600 mt-2">Amazing recipe! The flavors were perfect, and it was so easy to make.</p>
+                            <small class="text-gray-500">Posted on Nov 15, 2024</small>
                         </div>
-
+                        <hr>
                         <!-- Review 2 -->
-                        <div class="review-card mb-4">
-                            <h6 class="fw-bold">Jane Smith</h6>
-                            <div class="d-flex justify-content-start mb-2">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-muted"></i>
-                                <i class="bi bi-star-fill text-muted"></i>
+                        <div>
+                            <h6 class="font-bold text-gray-800">Jane Smith</h6>
+                            <div class="flex space-x-1 text-yellow-500">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star text-gray-300"></i>
+                                <i class="bi bi-star text-gray-300"></i>
                             </div>
-                            <p>Good, but I prefer adding a bit of garlic for extra flavor.</p>
-                            <small class="text-muted">Posted on Nov 16, 2024</small>
-                            <hr />
+                            <p class="text-gray-600 mt-2">Good, but I prefer adding a bit of garlic for extra flavor.</p>
+                            <small class="text-gray-500">Posted on Nov 16, 2024</small>
                         </div>
                     </div>
                 </div>
 
-                <!-- Add Review -->
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Leave a Review</h5>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="rating" class="form-label">Rating</label>
-                                <select class="form-select" id="rating">
-                                    <option value="5">5 - Excellent</option>
-                                    <option value="4">4 - Very Good</option>
-                                    <option value="3">3 - Good</option>
-                                    <option value="2">2 - Fair</option>
-                                    <option value="1">1 - Poor</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="comment" class="form-label">Comment</label>
-                                <textarea class="form-control" id="comment" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit Review</button>
-                        </form>
-                    </div>
+                <!-- Leave a Review -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Leave a Review</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label for="rating" class="block text-gray-700 font-medium mb-2">Rating</label>
+                            <select id="rating" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Rate from 1 to 5">
+                                <option value="" disabled selected>Choose a rating...</option>
+                                <option value="5">5 - Excellent</option>
+                                <option value="4">4 - Very Good</option>
+                                <option value="3">3 - Good</option>
+                                <option value="2">2 - Fair</option>
+                                <option value="1">1 - Poor</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="comment" class="block text-gray-700 font-medium mb-2">Comment</label>
+                            <textarea id="comment" class="w-full border border-gray-300 rounded-lg p-2" rows="3" placeholder="Write your comment here..."></textarea>
+                        </div>
+                        <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">Submit Review</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Recipe App 2023</p>
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-6">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; Recipe App 2024. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,210 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title> Page d'utilisateur - Recipe App</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        {% load static %}
-        <link href="{% static 'recipes/css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Recipe App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'recipes' %}">Accueil</a></li>
-                    </ul>
-                    <form class="d-flex">
-                        <a href="{% url 'logout' %}">
-                            <button class="btn btn-outline-dark me-2" type="button"> Se déconnecter </button>
-                        </a>
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Bienvenue, {{ user.username }}</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Accédez à vos paramètres, recettes créées et favoris.</p>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main content -->
-        <div class="container px-4 px-lg-5 py-5">
-            <div class="row">
-                <!-- Settings Panel -->
-                <div class="col-lg-12 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Paramètres</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <i class="bi bi-person-fill"></i> Profile
-                                    <a href="{% url 'change_name' %}" class="btn btn-link float-end">Modifier</a>
-                                </li>
-                                <!-- Change Password Button -->
-                                <li class="list-group-item">
-                                    <i class="bi bi-lock-fill"></i> Changer le mot de passe 
-                                    <!-- Link to open the change password form -->
-                                    <a href="{% url 'change_password' %}" class="btn btn-link float-end">Changer le mot de passe</a>
-                                </li>
-                                <!-- {% block content %} -->
-                                <!-- Content of the profile page -->
-                                <!-- {% endblock %} -->
-                                <!-- Modal for Changing Password -->
-                                <!-- <div class="modal fade {% if errors %}show{% endif %}" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="POST" action="{% url 'change_password' %}">
-                                                    {% csrf_token %}
-
-                                                    {% if errors %}
-                                                    <div class="alert alert-danger">
-                                                        <ul>
-                                                            {% for error in errors %}
-                                                            <li>{{ error }}</li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                    {% endif %}
-
-                                                    <div class="mb-3">
-                                                        <label for="oldPassword" class="form-label">Old Password</label>
-                                                        <input type="password" class="form-control" id="oldPassword" name="old_password" value="{{ old_password }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="newPassword" class="form-label">New Password</label>
-                                                        <input type="password" class="form-control" id="newPassword" name="new_password1" value="{{ new_password1 }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                                                        <input type="password" class="form-control" id="confirmPassword" name="new_password2" value="{{ new_password2 }}" required>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Change Password</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
- -->
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- My Recipes Panel -->
-                <div class="col-lg-12 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Mes Recettes</h5>
-                        </div>
-                        <div class="card-body">
-                            {% if recettes_user%}
-                            <p>Voici les recettes que vous avez créées:</p>
-                            {% endif %}
-                            {%for recette in recettes_user%}
-                            <!-- Recipe 1 -->
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="Recipe 1">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{recette.title}}</h5>
-                                            <p class="card-text">{{recette.description|truncatewords:10}}</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">Voir la recette</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            <button class="btn btn-outline-dark mt-3">Ajouter une recette</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- My Favorites Panel -->
-                <div class="col-lg-12 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Mes favories</h5>
-                        </div>
-                        <div class="card-body">
-                            <p>Voici vos recettes préférées</p>
-
-                            <!-- Favorite Recipe 1 -->
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="Favorite Recipe 1">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Recette préférée 1</h5>
-                                            <p class="card-text">A mouth-watering favorite. This recipe will definitely leave you wanting more.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 10 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">Voir la recette</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Favorite Recipe 2 -->
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="img-fluid rounded-start" alt="Favorite Recipe 2">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Recette préférée 2</h5>
-                                            <p class="card-text">A tasty dish that's easy to make and full of flavor. Perfect for any meal.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 20 mins ago</small></p>
-                                            <button class="btn btn-outline-dark">Voir la recette</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-outline-dark mt-3">Voir tous les favoris</button>
-                        </div>
-                    </div>
-                </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Profile - Recipe App</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans antialiased bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="{% url 'recipes' %}" class="text-2xl font-semibold text-teal-600">Recipe App</a>
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'logout' %}" class="bg-gray-800 text-white hover:bg-gray-900 px-4 py-2 rounded-lg">Se déconnecter</a>
             </div>
         </div>
+    </nav>
 
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
+    <!-- Header -->
+    <header class="bg-gray-900 py-16">
+        <div class="container mx-auto text-center text-white">
+            <h1 class="text-4xl font-bold">Bienvenue, {{ user.username }}</h1>
+            <p class="text-lg mt-4 text-gray-400">Accédez à vos paramètres, recettes créées et favoris.</p>
+        </div>
+    </header>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'recipes/js/scripts.js' %}"></script>
-    </body>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Settings Panel -->
+        <section class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Paramètres</h2>
+            <div class="border-t-2 border-gray-200 my-4"></div> <!-- Separator -->
+            <!-- User Profile Summary -->
+            <div class="flex items-center space-x-4 mb-6">
+                <img class="w-16 h-16 rounded-full object-cover border-2 border-teal-500" src="https://dummyimage.com/64x64/dee2e6/6c757d.jpg" alt="Profile Picture">
+                <div>
+                    <p class="text-lg font-semibold text-gray-800">{{ user.username }}</p>
+                    <p class="text-sm text-gray-600">Email: {{ user.email }}</p>
+                    <p class="text-sm text-gray-600">Membre depuis: {{ user.date_joined|date:"d M Y" }}</p>
+                </div>
+            </div>
+            <ul class="space-y-4">
+                <li class="flex justify-between items-center">
+                    <span class="text-lg text-gray-700 flex items-center space-x-2">
+                        <i class="bi bi-person-fill text-teal-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <a href="{% url 'change_name' %}" class="text-teal-600 hover:underline">Modifier</a>
+                </li>
+                <li class="flex justify-between items-center">
+                    <span class="text-lg text-gray-700 flex items-center space-x-2">
+                        <i class="bi bi-lock-fill text-teal-500"></i>
+                        <span>Changer le mot de passe</span>
+                    </span>
+                    <a href="{% url 'change_password' %}" class="text-teal-600 hover:underline">Changer le mot de passe</a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- My Recipes and My Favorites (In Same Row) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+            <!-- My Recipes Panel -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Mes Recettes</h2>
+                <div class="border-t-2 border-gray-200 my-4"></div> <!-- Separator -->
+                {% if recettes_user %}
+                    <p class="text-gray-600 mb-4">Voici les recettes que vous avez créées :</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for recette in recettes_user %}
+                        <div class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition">
+                            <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="{{ recette.title }}" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-gray-800">{{ recette.title }}</h3>
+                                <p class="text-gray-600 mt-2">{{ recette.description|truncatewords:10 }}</p>
+                            </div>
+                            <div class="p-4 bg-gray-50">
+                                <a href="#" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 block text-center rounded-lg">Voir la recette</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-gray-600">Vous n'avez pas encore créé de recettes.</p>
+                {% endif %}
+                <button class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 rounded-lg mt-4"><a href="{% url 'createrecipe'%}">Ajouter une recette</a></button>
+            </div>
+
+            <!-- My Favorites Panel -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Mes Favoris</h2>
+                <div class="border-t-2 border-gray-200 my-4"></div> <!-- Separator -->
+                <p class="mt-4 text-lg text-gray-600">Voici vos recettes préférées:</p>
+                <div class="space-y-4 mt-4">
+                    {% for fav in recettesfav %}
+                    <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
+                        <div class="w-1/3">
+                            <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
+                        </div>
+                        <div class="ml-4 w-2/3">
+                            <h3 class="text-xl font-semibold text-gray-800">{{ fav.recette.title }}</h3>
+                            <p class="text-gray-600">{{ fav.recette.description|truncatewords:10 }}</p>
+                            <!-- <p class="text-sm text-gray-500 mt-1">Dernière modification : 10 min</p> -->
+                            <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-center text-gray-700">Aucune recette favorite trouvée.</p>
+                    {% endfor %}
+                    <button class="mt-6 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600"><a href="{% url 'recettes_favorites' %}">Voir tous les favoris</a></button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-6">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; Recipe App 2023. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
 </html>

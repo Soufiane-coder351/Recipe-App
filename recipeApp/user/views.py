@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login, logout,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from recipes.models import Recipe
+from recipes.models import Recipe,Favorites
 from django.contrib import messages
 
 
@@ -98,7 +98,8 @@ def signup_view(request):
 @login_required
 def profile_view(request):
     recettes_user = Recipe.objects.filter(user=request.user)
-    return render(request, 'user/profile.html',{'recettes_user':recettes_user})
+    recettesfav = Favorites.objects.filter(user=request.user)
+    return render(request, 'user/profile.html',{'recettes_user':recettes_user,'recettesfav':recettesfav})
 
 
 @login_required
