@@ -12,10 +12,9 @@
     <!-- Navigation Bar -->
     <nav class="bg-gray-900 py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-semibold text-white">RecipeApp</a>
+            <a href="{% url 'recipes' %}" class="text-2xl font-semibold text-white">RecipeApp</a>
             <div class="flex space-x-4">
-                <a href="#" class="text-white hover:bg-gray-700 px-4 py-2 rounded-lg">Accueil</a>
-                <a href="#" class="text-white hover:bg-gray-700 px-4 py-2 rounded-lg">À propos</a>
+                <a href="{% url 'recipes' %}" class="text-white hover:bg-gray-700 px-4 py-2 rounded-lg">Accueil</a>
             </div>
         </div>
     </nav>
