@@ -1,12 +1,7 @@
-# recipe_app_by_web_wizards
+# Recipe App par WebWizards
 
 
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
 ## Add your files
 
@@ -52,42 +47,49 @@ When you're ready to make this README your own, just edit this file and use the 
 
 Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
+
+## Intro
+
+Dans le cadre des CodingWeeks, nous avons réalisé un site internet, Recipe App, de recette de cuisine communautaire permettant au gens de partager des recettes. 
+
+## Sommaire
+
+*   [Name](#name)
+*   [Description](#description)
+*   [Installation](#installation)
+*   [Front end](#front-end)
+#   [Usage](#usage)
+*   [La suite](#la-suite)
+*   [Codeur et remerciement](#codeur_et_remerciement)
+
 ## Name
-Choose a self-explaining name for your project.
+Le nom du site est **Recipe App**
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+L'idée de base était de créer un **site** permettant aux utilisateurs de **partager** leurs **recettes de cuisine** préférées de façon **intuitive** et **rapide**, et de consulter les recttes des autres utilisateurs avec la même simplicité. 
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+Le projet a été codé en python en utilisant django (un framwork open source qui facilite le développement rapide et structuré d'une application web). L'interface utilisateur à elle était codée en html. 
+
+## Front end
+Nous avons pris un thème sur startbootstrap, et l'avons modifié avec tailwind et css. Le thème de base étant en noir et blanc, nous l'avons coloré. En s'inspirant du design de la page d'acceuil, nous avons alors codé les différentes pages du site (page des recettes, page d'ajout de recette pour les utilisateurs, page de connexion d'utilisateur, page du profil de l'utilisateur...).
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Supposons que l'utilisateur ait créé une recette qu'il souhaite partager en ligne. Il pourra alors se connecter sur Recipe App et partager cette recette en précisant les étapes et les ingrédients de façon naturelle. Il peut, s'il le souhaite, ajouter des photos pour illustrer sa recette et les étapes de celle-ci.  Les autres utilisateurs pourront voir sa recette, mettre un commentaire, un avis, ou même la rajouter en favoris sur leurs compte.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+De même, si ce même client cherche une recette en particulier, ou tout simplement qu'il n'a pas d'idée, il peut se connecter sur le site et profiter des recettes des autres utilisateurs, les essayers, les commenters, et les mettres en favoris. 
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## La suite
+-   **Filtrer** par régime alimentaire, par type de repas dans la journée (petit-déjeuner, déjeuner, dîner).
+-   On aurait l'idée pour plus tard d'implémeter une recherche par ingrédient. C'est-à-dire, si un utilisateur a certains ingrédients dans son réfrégirateur, il peut les taper dans la barre  de recherche, et le site lui retourne des recttes avec ces ingrédients, ou moins.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Codeur et remerciement
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Un grand **Merci** à toute les personnes ayant participé à ce projet : Soufien El Mazlouzi, Solal Abitbol,  Ismail Ameur, Hiba Jlibina, Asmae El Madaouy, Ayoub Chikri. 
 
-## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+
+
