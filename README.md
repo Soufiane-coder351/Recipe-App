@@ -11,7 +11,7 @@ Dans le cadre des CodingWeeks, nous avons réalisé un site internet, Recipe App
 *   [Description](#description)
 *   [Installation](#installation)
 *   [Front end](#front-end)
-#   [Usage](#usage)
+*   [Usage](#usage)
 *   [La suite](#la-suite)
 *   [Codeur et remerciement](#codeur_et_remerciement)
 
