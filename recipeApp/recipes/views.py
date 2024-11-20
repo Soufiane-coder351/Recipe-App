@@ -11,16 +11,15 @@ def index(request):
     recettes = Recipe.objects.all()
     return HttpResponse(template.render(request=request,context={"recettes":recettes}))
 
+@login_required
 def createrecipe(request):
-    template = loader.get_template("./recipes/createrecipe.html")
-    return HttpResponse(template.render(request=request))
+    return render(request,"recipes/createrecipe.html")
+    
 
 def recette_info(request):
     return render(request,'recipes/recette_info.html')
 
 @login_required
 def afficher_favoris(request):
-    template = loader.get_template("./recipes/favorites.html") #j'anticipe mais il ft que j'ai un fichier html pour les favoris solal s'en charge
     favoris = Favorites.objects.filter(user=request.user)
-    return HttpResponse(template.render(request=request,context={"favoris":favoris}))
-    
+    return render(request,'recipes/favorites.html',{"favoris":favoris})    
