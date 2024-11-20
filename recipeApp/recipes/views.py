@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from recipes.models import Recipe
+from recipes.models import Recipe,Avis
 from recipes.models import Favorites
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -48,8 +48,14 @@ def createrecipe(request):
     return render(request,"recipes/createrecipe.html")
     
 
-def recette_info(request):
-    return render(request,'recipes/recette_info.html')
+def recette_info(request, title):
+    recette = Recipe.objects.get(title=title)
+    reviews = Avis.objects.filter(recipe=recette)
+    for review in reviews:
+        review.filled_stars = [1] * review.rating  # List of 1's for filled stars
+        review.empty_stars = [1] * (5 - review.rating)  # List of 1's for empty stars
+
+    return render(request,'recipes/recette_info.html',{'recette': recette, 'reviews':reviews})
 
 @login_required
 def afficher_favoris(request):
