@@ -44,14 +44,45 @@
         </div>
     </header>
     <!-- Search Bar -->
-    <section class="mt-8">
+
+
+   <!-- <section class="mt-8">
         <div class="container mx-auto px-4">
             <div class="flex items-center">
                 <input type="text" placeholder="Rechercher une recette..." class="flex-1 border border-gray-300 p-3 rounded-l-lg focus:outline-none">
                 <button class="bg-teal-500 text-white hover:bg-teal-600 px-6 py-3 rounded-r-lg">Rechercher</button>
             </div>
         </div>
-    </section>
+        </section> -->
+
+        <div class="container mx-auto px-4 mt-8">
+            <!-- Formulaire de recherche qui envoie la requête GET -->
+            <form action="{% url 'chercher_recette' %}" method="get" class="flex items-center">
+                <input 
+                    type="text" 
+                    name="query" 
+                    placeholder="Rechercher une recette..." 
+                    class="flex-1 border border-gray-300 p-3 rounded-l-lg focus:outline-none"
+                    value="{{ request.GET.query }}"  
+                    required 
+                >
+                <button 
+                    type="submit" 
+                    class="bg-teal-500 text-white hover:bg-teal-600 px-6 py-3 rounded-r-lg"
+                >
+                    Rechercher
+                </button>
+            </form>
+        </div>
+    
+
+
+
+
+   
+    
+
+
     <!-- Recipes Section -->
     <section class="py-8">
         <div class="container mx-auto px-4">
