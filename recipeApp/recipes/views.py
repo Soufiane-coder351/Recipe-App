@@ -4,12 +4,9 @@ from django.template import loader
 from recipes.models import Recipe,Avis
 from recipes.models import Favorites
 from django.contrib.auth.decorators import login_required
-<<<<<<< recipeApp/recipes/views.py
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 
-=======
->>>>>>> recipeApp/recipes/views.py
 
 def index(request):
     template = loader.get_template("./recipes/index.html")
@@ -56,10 +53,6 @@ def createrecipe(request):
 def recette_info(request, title):
     recette = Recipe.objects.get(title=title)
     reviews = Avis.objects.filter(recipe=recette)
-    for review in reviews:
-        review.filled_stars = [1] * review.rating  # List of 1's for filled stars
-        review.empty_stars = [1] * (5 - review.rating)  # List of 1's for empty stars
-
     return render(request,'recipes/recette_info.html',{'recette': recette, 'reviews':reviews})
 
 @login_required
