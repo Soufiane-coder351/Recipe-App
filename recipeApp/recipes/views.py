@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from recipes.models import Recipe
+from recipes.models import Recipe,Avis
 from recipes.models import Favorites
 from django.contrib.auth.decorators import login_required
+<<<<<<< recipeApp/recipes/views.py
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 
+=======
+>>>>>>> recipeApp/recipes/views.py
 
 def index(request):
     template = loader.get_template("./recipes/index.html")
@@ -14,11 +18,49 @@ def index(request):
 
 @login_required
 def createrecipe(request):
+    '''
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    instructions = models.TextField()
+    '''
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        instructions = request.POST.get('instructions')
+        user = request.user
+        
+        errors = []
+        
+        if Recipe.objects.filter(title=title).exists():
+            errors.append("Titre de la recette existe déjà")
+        
+        if not errors:
+            try:
+                recipe = Recipe.objects.create(title=title,description=description,instructions=instructions,user=user)
+                recipe.save()
+                return redirect('profile')
+
+            except Exception as e:
+                errors.append(str(e))
+        
+        return render(request,'recipes/createrecipe.html', {'errors':errors, 'values' : {
+            'title':title,
+            'description':description,
+            'instructions': instructions
+        }})
+
     return render(request,"recipes/createrecipe.html")
     
 
-def recette_info(request):
-    return render(request,'recipes/recette_info.html')
+def recette_info(request, title):
+    recette = Recipe.objects.get(title=title)
+    reviews = Avis.objects.filter(recipe=recette)
+    for review in reviews:
+        review.filled_stars = [1] * review.rating  # List of 1's for filled stars
+        review.empty_stars = [1] * (5 - review.rating)  # List of 1's for empty stars
+
+    return render(request,'recipes/recette_info.html',{'recette': recette, 'reviews':reviews})
 
 @login_required
 def afficher_favoris(request):

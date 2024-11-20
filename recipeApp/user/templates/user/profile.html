@@ -69,21 +69,20 @@
                 <div class="border-t-2 border-gray-200 my-4"></div> <!-- Separator -->
                 {% if recettes_user %}
                     <p class="text-gray-600 mb-4">Voici les recettes que vous avez créées :</p>
-                    <div class="space-y-4 mt-4">
+                    <div class="space-y-4 mt-4" style="max-height: 400px; overflow-y: auto;">
                         {% for recette in recettes_user %}
-                        <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
-                            <div class="w-1/3">
-                                <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
+                            <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
+                                <div class="w-1/3">
+                                    <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
+                                </div>
+                                <div class="ml-4 w-2/3">
+                                    <h3 class="text-xl font-semibold text-gray-800">{{ recette.title }}</h3>
+                                    <p class="text-gray-600">{{ recette.description|truncatewords:10 }}</p>
+                                    <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
+                                </div>
                             </div>
-                            <div class="ml-4 w-2/3">
-                                <h3 class="text-xl font-semibold text-gray-800">{{ recette.title }}</h3>
-                                <p class="text-gray-600">{{ recette.description|truncatewords:10 }}</p>
-                                <!-- <p class="text-sm text-gray-500 mt-1">Dernière modification : 10 min</p> -->
-                                <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
-                            </div>
-                        </div>
                         {% empty %}
-                        <p class="text-center text-gray-700">Aucune recette favoris trouvée.</p>
+                            <p class="text-center text-gray-700">Aucune recette favoris trouvée.</p>
                         {% endfor %}
                     </div>
                 {% else %}
@@ -92,32 +91,34 @@
                 <button class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 rounded-lg mt-4"><a href="{% url 'createrecipe'%}">Ajouter une recette</a></button>
             </div>
 
+
             <!-- My Favorites Panel -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Mes Favoris</h2>
                 <div class="border-t-2 border-gray-200 my-4"></div> <!-- Separator -->
-                {% if recettesfav%}
-                <p class="mt-4 text-lg text-gray-600">Voici vos recettes préférées:</p>
+                {% if recettesfav %}
+                    <p class="mt-4 text-lg text-gray-600">Voici vos recettes préférées:</p>
                 {% endif %}
-                <div class="space-y-4 mt-4">
+                <div class="space-y-4 mt-4" style="max-height: 400px; overflow-y: auto;">
                     {% for fav in recettesfav %}
-                    <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
-                        <div class="w-1/3">
-                            <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
+                        <div class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm">
+                            <div class="w-1/3">
+                                <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="w-full rounded-lg" alt="Favorite Recipe 1">
+                            </div>
+                            <div class="ml-4 w-2/3">
+                                <h3 class="text-xl font-semibold text-gray-800">{{ fav.recette.title }}</h3>
+                                <p class="text-gray-600">{{ fav.recette.description|truncatewords:10 }}</p>
+                                <!-- <p class="text-sm text-gray-500 mt-1">Dernière modification : 10 min</p> -->
+                                <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
+                            </div>
                         </div>
-                        <div class="ml-4 w-2/3">
-                            <h3 class="text-xl font-semibold text-gray-800">{{ fav.recette.title }}</h3>
-                            <p class="text-gray-600">{{ fav.recette.description|truncatewords:10 }}</p>
-                            <!-- <p class="text-sm text-gray-500 mt-1">Dernière modification : 10 min</p> -->
-                            <button class="mt-4 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Voir la recette</button>
-                        </div>
-                    </div>
                     {% empty %}
-                    <p class="text-center text-gray-700">Aucune recette favoris trouvée.</p>
+                        <p class="text-center text-gray-700">Aucune recette favoris trouvée.</p>
                     {% endfor %}
-                    <button class="mt-6 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600"><a href="{% url 'recettes_favorites' %}">Voir tous les favoris</a></button>
                 </div>
+                <button class="mt-6 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600"><a href="{% url 'recettes_favorites' %}">Voir tous les favoris</a></button>
             </div>
+
         </section>
 
     </main>
