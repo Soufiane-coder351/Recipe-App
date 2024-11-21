@@ -120,9 +120,12 @@ def submit_review(request):
         comment = request.POST.get('comment')  
 
         if not comment:
-            return HttpResponse("Comment field is required!", status=400)
+            messages.error(request, "Le champ du commentaire est requis !")
+            return redirect('recette_info', title=recipe.title)
+        
         # Save the rating and comment to the database
         Avis.objects.create(recipe=recipe, user=request.user, content=comment, rating=rating)
+        messages.success(request, "Votre avis est transmis avec succès !")
         return redirect('recette_info', title=recipe.title)  # Redirect to the recipe page
     return HttpResponse("Invalid request method.", status=405)
 

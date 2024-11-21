@@ -125,6 +125,14 @@
                         </div>
                         <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">Soumettre</button>
                     </form>
+                    <!-- Success Message -->
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4 mb-4">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
