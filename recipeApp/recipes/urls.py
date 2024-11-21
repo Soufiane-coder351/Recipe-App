@@ -11,4 +11,6 @@ urlpatterns=[
     path('chercher_recette/', recipes.views.chercher_recette, name='chercher_recette'),
     path('recette/<int:recipe_id>/favorite/', recipes.views.toggle_favorite, name='toggle_favorite'),
     path('submit_review/', recipes.views.submit_review, name='submit_review'),
+    path('review/delete/<int:review_id>/', recipes.views.delete_review, name='delete_review'),
+    
 ]
