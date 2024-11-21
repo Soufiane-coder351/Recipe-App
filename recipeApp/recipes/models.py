@@ -46,7 +46,7 @@ class Avis(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     content = models.TextField()  # Contenu de l'avis
     rating = models.PositiveIntegerField(default=0)  # Note (optionnelle)
-
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp when the review is created
     def __str__(self):
         return f'Avis de {self.user.username} sur {self.recipe.title}'
     

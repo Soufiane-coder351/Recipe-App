@@ -12,7 +12,7 @@ from django.db.utils import IntegrityError
 def index(request):
     template = loader.get_template("./recipes/index.html")
     liste_recettes = Recipe.objects.all()
-    paginator = Paginator(liste_recettes, 3)  # 12 recettes par page
+    paginator = Paginator(liste_recettes, 8)  # 12 recettes par page
     page_number = request.GET.get('page')  # Numéro de la page actuelle
     recettes = paginator.get_page(page_number)  # Obtenez les recettes pour la page
 
