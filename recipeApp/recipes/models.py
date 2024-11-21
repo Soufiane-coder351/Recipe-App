@@ -26,6 +26,20 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+# Step Model (Related to Recipe)
+class Step(models.Model):
+    recipe = models.ForeignKey(Recipe, related_name='steps', on_delete=models.CASCADE)
+    description = models.TextField()
+    image = models.ImageField(upload_to='step_images/', blank=True, null=True)  # Optional image for each step
+    order = models.PositiveIntegerField()  # To define the order of steps
+
+    class Meta:
+        ordering = ['order']  # Ensures steps are ordered by the 'order' field
+
+    def __str__(self):
+        return f"Step {self.order} for {self.recipe.title}"
 
 # Relation ManyToMany entre Recipe et User pour les avis
 class Avis(models.Model):

@@ -7,12 +7,12 @@ function addStep() {
     const newStep = document.createElement('div');
     newStep.classList.add('mb-4', 'step');
     newStep.innerHTML = `
-                <label for="stepDescription${stepCount}" class="block text-gray-700 text-lg font-medium">Étape ${stepCount} - Description</label>
-                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepDescription${stepCount}" placeholder="Entrez la description de l'étape">
+        <label for="stepDescription${stepCount}" class="block text-gray-700 text-lg font-medium">Étape ${stepCount} - Description</label>
+        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepDescription${stepCount}" name="stepDescription${stepCount}" placeholder="Entrez la description de l'étape">
 
-                <label for="stepImage${stepCount}" class="block text-gray-700 text-lg font-medium mt-2">Image de l'étape ${stepCount}</label>
-                <input type="file" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepImage${stepCount}" accept="image/*">
-            `;
+        <label for="stepImage${stepCount}" class="block text-gray-700 text-lg font-medium mt-2">Image de l'étape ${stepCount}</label>
+        <input type="file" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepImage${stepCount}" name="stepImage${stepCount}" accept="image/*">
+    `;
     stepsContainer.appendChild(newStep);
 }
 

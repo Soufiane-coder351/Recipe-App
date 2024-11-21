@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from recipes.models import Recipe,Avis , Ingredient, Produit, Favorites
+from recipes.models import Recipe,Avis , Ingredient, Produit, Favorites, Step
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -16,12 +16,6 @@ def index(request):
 
 @login_required
 def createrecipe(request):
-    '''
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    instructions = models.TextField()
-    '''
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -32,8 +26,20 @@ def createrecipe(request):
 
         # Get ingredients from the request
         ingredients = request.POST.get('ingredients')  # Get the comma-separated string
-        print("ingredients are : ")
-        print(ingredients)
+        
+        # Get instructions steps dynamically
+        steps = []
+        step_count = 1
+        while f'stepDescription{step_count}' in request.POST:
+            step_description = request.POST.get(f'stepDescription{step_count}')
+            step_image = request.FILES.get(f'stepImage{step_count}')
+            if step_description:
+                steps.append({
+                    'description': step_description,
+                    'image': step_image,
+                    'order': step_count,  # Set the step order based on the count
+                })
+            step_count += 1
 
         if Recipe.objects.filter(title=title).exists():
             errors.append("Titre de la recette existe déjà")
@@ -44,14 +50,23 @@ def createrecipe(request):
                 recipe = Recipe.objects.create(title=title, description=description, instructions=instructions, user=user, image=image)
                 recipe.save()
 
-                # Convert the comma-separated string into a list
+                # Convert the comma-separated string into a list for ingredients
                 ingredient_list = ingredients.split(',') if ingredients else []
-                
-                # For each ingredient, create an Ingredient entry and associate it with the recipe
+
+                # Create ingredients for the recipe
                 for ingredient_name in ingredient_list:
                     if ingredient_name:
-                        produit, created = Produit.objects.get_or_create(name=ingredient_name)  # Get or create the ingredient
-                        Ingredient.objects.create(produit=produit, recette=recipe, qtté="")  # Assuming no quantity for now, you can adjust this later
+                        produit, created = Produit.objects.get_or_create(name=ingredient_name)
+                        Ingredient.objects.create(produit=produit, recette=recipe, qtté="")  # Assuming no quantity for now
+
+                # Create steps for the recipe
+                for step_data in steps:
+                    Step.objects.create(
+                        recipe=recipe,
+                        description=step_data['description'],
+                        image=step_data['image'],
+                        order=step_data['order'],
+                    )
 
                 return redirect('profile')
 
@@ -67,13 +82,13 @@ def createrecipe(request):
     return render(request, "recipes/createrecipe.html")
 
 
-
 def recette_info(request, recipe_id):
     recette = get_object_or_404(Recipe, id=recipe_id)
     is_favorited = Favorites.objects.filter(user=request.user, recette=recette).exists() if request.user.is_authenticated else False
     reviews = Avis.objects.filter(recipe=recette)
     ingredients = Ingredient.objects.filter(recette=recette)
-    return render(request, 'recipes/recette_info.html', {'recette': recette, 'is_favorited': is_favorited,'reviews':reviews,'ingredients':ingredients})
+    steps = Step.objects.filter(recipe=recette)
+    return render(request, 'recipes/recette_info.html', {'recette': recette, 'is_favorited': is_favorited,'reviews':reviews,'ingredients':ingredients,'steps':steps})
 
 
 @login_required
