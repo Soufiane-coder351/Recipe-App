@@ -53,7 +53,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {% for fav in favoris %}
                 <div class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition flex flex-col">
-                    <img src="../../../recipes_photos/{{recette.image }}" 
+                    <img src="../../../recipes_photos/{{fav.recette.image }}" 
                         class="w-full h-[200px] object-cover rounded-lg" 
                         onerror="this.onerror=null; this.src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg';">
                     <div class="p-4 flex-grow">
