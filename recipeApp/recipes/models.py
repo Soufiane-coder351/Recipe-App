@@ -22,6 +22,7 @@ class Recipe(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     instructions = models.TextField()
+    image = models.ImageField(upload_to='recipes_photos/',default="https://dummyimage.com/450x300/dee2e6/6c757d.jpg")
 
     def __str__(self):
         return self.title
