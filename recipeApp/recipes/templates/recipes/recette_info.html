@@ -115,7 +115,7 @@
                         <input type="hidden" name="recipe_title" value="{{ recette.title }}">
                         <div class="mb-4">
                             <label for="rating" class="block text-gray-700 font-medium mb-2">Note</label>
-                            <select id="rating" class="w-full border border-gray-300 rounded-lg p-2">
+                            <select name="rating" id="rating" class="w-full border border-gray-300 rounded-lg p-2">
                                 <option value="" disabled selected>Choisissez une note...</option>
                                 <option value="5">5 - Excellent</option>
                                 <option value="4">4 - Très bon</option>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="comment" class="block text-gray-700 font-medium mb-2">Commentaire</label>
-                            <textarea id="comment" class="w-full border border-gray-300 rounded-lg p-2" rows="3" placeholder="Écrivez votre commentaire ici..."></textarea>
+                            <textarea name="comment" id="comment" class="w-full border border-gray-300 rounded-lg p-2" rows="3" placeholder="Écrivez votre commentaire ici..."></textarea>
                         </div>
                         <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">Soumettre</button>
                     </form>

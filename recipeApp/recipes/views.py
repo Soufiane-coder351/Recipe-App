@@ -58,7 +58,8 @@ def createrecipe(request):
 def recette_info(request, title):
     recette = get_object_or_404(Recipe, title=title)
     is_favorited = Favorites.objects.filter(user=request.user, recette=recette).exists() if request.user.is_authenticated else False
-    return render(request, 'recipes/recette_info.html', {'recette': recette, 'is_favorited': is_favorited})
+    reviews = Avis.objects.filter(recipe=recette)
+    return render(request, 'recipes/recette_info.html', {'recette': recette, 'is_favorited': is_favorited,'reviews':reviews})
 
 
 @login_required
@@ -108,8 +109,6 @@ def submit_review(request):
             return HttpResponse("Comment field is required!", status=400)
         # Save the rating and comment to the database
         Avis.objects.create(recipe=recipe, user=request.user, content=comment, rating=rating)
-        avi=Avis.objects.get(recipe=recipe, user=request.user, content=comment, rating=rating)
-        messages.success(request, "Your review has been submitted!")
         return redirect('recette_info', title=recipe.title)  # Redirect to the recipe page
     return HttpResponse("Invalid request method.", status=405)
 
