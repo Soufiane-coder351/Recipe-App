@@ -75,7 +75,7 @@ def createrecipe(request):
         return render(request, 'recipes/createrecipe.html', {'errors': errors, 'values': {
             'title': title,
             'description': description,
-            'instructions': instructions
+            'steps': steps,
         }})
 
     return render(request, "recipes/createrecipe.html")
