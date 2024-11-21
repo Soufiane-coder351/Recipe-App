@@ -111,9 +111,9 @@ def toggle_favorite(request, recipe_id):
 @login_required
 def submit_review(request):
     if request.method == "POST":
-        recipe_title= request.POST.get('recipe_title')
+        recipe_id= request.POST.get('recipe_id')
         try:
-            recipe = Recipe.objects.get(title=recipe_title)
+            recipe = Recipe.objects.get(id=recipe_id)
         except Recipe.DoesNotExist:
             return HttpResponse("Recipe not found", status=404)
         rating = request.POST.get('rating')
