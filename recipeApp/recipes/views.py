@@ -6,10 +6,15 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 def index(request):
     template = loader.get_template("./recipes/index.html")
-    recettes = Recipe.objects.all()
+    liste_recettes = Recipe.objects.all()
+    paginator = Paginator(liste_recettes, 3)  # 12 recettes par page
+    page_number = request.GET.get('page')  # Numéro de la page actuelle
+    recettes = paginator.get_page(page_number)  # Obtenez les recettes pour la page
+
     return HttpResponse(template.render(request=request,context={"recettes":recettes}))
 
 
@@ -82,7 +87,10 @@ def createrecipe(request):
 
 
 def recette_info(request, recipe_id):
-    recette = get_object_or_404(Recipe, id=recipe_id)
+    try:
+        recette=Recipe.objects.get(id=recipe_id)
+    except Recipe.DoesNotExist:
+        return HttpResponse("Recipe not found", status=404)
     is_favorited = Favorites.objects.filter(user=request.user, recette=recette).exists() if request.user.is_authenticated else False
     reviews = Avis.objects.filter(recipe=recette)
     ingredients = Ingredient.objects.filter(recette=recette)
@@ -105,7 +113,10 @@ def chercher_recette(request):
 
 def toggle_favorite(request, recipe_id):
     # Récupérer la recette à partir de son ID
-    recipe = get_object_or_404(Recipe, id=recipe_id)
+    try:
+        recipe = Recipe.objects.get(id=recipe_id)
+    except Recipe.DoesNotExist:
+        return HttpResponse("Recipe not found", status=404)
     
     # Vérifier si cette recette est déjà dans les favoris de l'utilisateur
     favorite = Favorites.objects.filter(user=request.user, recette=recipe).first()
