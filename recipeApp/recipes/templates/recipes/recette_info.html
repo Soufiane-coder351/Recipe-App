@@ -100,10 +100,12 @@
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Leave a Review</h2>
                     <hr>
-                    <form>
+                    <form action="{% url 'submit_review' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="recipe_title" value="{{ recette.title }}">
                         <div class="mb-4">
                             <label for="rating" class="block text-gray-700 font-medium mb-2">Rating</label>
-                            <select id="rating" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Rate from 1 to 5">
+                            <select id="rating" name ='rating' class="w-full border border-gray-300 rounded-lg p-2" placeholder="Rate from 1 to 5">
                                 <option value="" disabled selected>Choose a rating...</option>
                                 <option value="5">5 - Excellent</option>
                                 <option value="4">4 - Very Good</option>
@@ -114,7 +116,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="comment" class="block text-gray-700 font-medium mb-2">Comment</label>
-                            <textarea id="comment" class="w-full border border-gray-300 rounded-lg p-2" rows="3" placeholder="Write your comment here..."></textarea>
+                            <textarea id="comment" name ='comment' class="w-full border border-gray-300 rounded-lg p-2" rows="3" placeholder="Write your comment here..."></textarea>
                         </div>
                         <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">Submit Review</button>
                     </form>

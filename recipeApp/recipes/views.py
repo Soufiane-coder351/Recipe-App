@@ -5,6 +5,9 @@ from recipes.models import Recipe,Avis
 from recipes.models import Favorites
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+
 
 def index(request):
     template = loader.get_template("./recipes/index.html")
@@ -61,3 +64,25 @@ def recette_info(request, title):
 def afficher_favoris(request):
     favoris = Favorites.objects.filter(user=request.user)
     return render(request,'recipes/favorites.html',{"favoris":favoris})    
+
+@login_required
+def submit_review(request):
+    if request.method == "POST":
+        recipe_title= request.POST.get('recipe_title')
+        try:
+            recipe = Recipe.objects.get(title=recipe_title)
+        except Recipe.DoesNotExist:
+            return HttpResponse("Recipe not found", status=404)
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')  
+
+        if not comment:
+            return HttpResponse("Comment field is required!", status=400)
+        # Save the rating and comment to the database
+        Avis.objects.create(recipe=recipe, user=request.user, content=comment, rating=rating)
+        avi=Avis.objects.get(recipe=recipe, user=request.user, content=comment, rating=rating)
+        messages.success(request, "Your review has been submitted!")
+        return redirect('recette_info', title=recipe.title)  # Redirect to the recipe page
+    return HttpResponse("Invalid request method.", status=405)
+
+
