@@ -19,7 +19,6 @@ def createrecipe(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
-        instructions = request.POST.get('instructions')
         image = request.FILES.get('image')
         user = request.user
         errors = []
@@ -47,7 +46,7 @@ def createrecipe(request):
         if not errors:
             try:
                 # Create the recipe
-                recipe = Recipe.objects.create(title=title, description=description, instructions=instructions, user=user, image=image)
+                recipe = Recipe.objects.create(title=title, description=description, user=user, image=image)
                 recipe.save()
 
                 # Convert the comma-separated string into a list for ingredients
