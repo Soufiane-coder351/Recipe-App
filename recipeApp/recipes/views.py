@@ -106,7 +106,7 @@ def toggle_favorite(request, recipe_id):
         messages.success(request, f"La recette '{recipe.title}' a été ajoutée à vos favoris.")
     
     # Rediriger vers la page des détails de la recette
-    return redirect('recette_info', title=recipe.title)
+    return redirect('recette_info', recipe_id=recipe.id)
 
 @login_required
 def submit_review(request):
