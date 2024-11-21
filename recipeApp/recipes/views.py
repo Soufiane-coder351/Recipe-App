@@ -113,11 +113,11 @@ def toggle_favorite(request, recipe_id):
     if favorite:
         # Si la recette est déjà dans les favoris, on la supprime
         favorite.delete()
-        messages.success(request, f"La recette '{recipe.title}' a été retirée de vos favoris.")
+        # messages.success(request, f"La recette '{recipe.title}' a été retirée de vos favoris.")
     else:
         # Sinon, on l'ajoute aux favoris
         Favorites.objects.create(user=request.user, recette=recipe)
-        messages.success(request, f"La recette '{recipe.title}' a été ajoutée à vos favoris.")
+        # messages.success(request, f"La recette '{recipe.title}' a été ajoutée à vos favoris.")
     
     # Rediriger vers la page des détails de la recette
     return redirect('recette_info', recipe_id=recipe.id)
@@ -133,10 +133,6 @@ def submit_review(request):
         rating = request.POST.get('rating')
         comment = request.POST.get('comment')  
 
-        if not comment:
-            messages.error(request, "Le champ du commentaire est requis !")
-            return redirect('recette_info', recipe_id=recipe.id)
-        
         # Save the rating and comment to the database
         Avis.objects.create(recipe=recipe, user=request.user, content=comment, rating=rating)
         messages.success(request, "Votre avis est transmis avec succès !")
