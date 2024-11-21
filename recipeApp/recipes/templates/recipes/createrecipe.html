@@ -72,10 +72,11 @@
                     <div id="ingredientsContainer">
                         <div class="flex mb-2">
                             <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-l-lg bg-gray-50 text-gray-800" id="ingredientInput" placeholder="Entrez un ingrédient" />
-                            <button type="button" class="w-16 px-4 py-2 bg-teal-500 text-white rounded-r-lg" id="addIngredientBtn">Ajouter</button>
+                            <button type="button" class="px-4 py-2 bg-teal-500 text-white rounded-r-lg" id="addIngredientBtn">Ajouter</button>
                         </div>
                         <div id="ingredientsList" class="flex flex-wrap gap-2"></div>
                     </div>
+                    <input type="text" id="ingredientsInput" name="ingredients" hidden> <!--Hidden field for ingredients-->
                 </div>
             </div>
 
@@ -84,6 +85,22 @@
                 <label for="instructions" class="block text-gray-700 text-lg font-medium">Instructions</label>
                 <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="instructions" name="instructions" rows="6" placeholder="Entrez les instructions étape par étape" required></textarea>
             </div>
+
+            <!-- Step-by-step Instructions with Images -->
+            <h4 class="text-xl font-semibold text-gray-700 mb-4">Instructions étape par étape</h4>
+            <div id="stepsContainer">
+                <div class="mb-4 step">
+                    <label for="stepDescription1" class="block text-gray-700 text-lg font-medium">Étape 1 - Description</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepDescription1" placeholder="Entrez la description de l'étape">
+
+                    <label for="stepImage1" class="block text-gray-700 text-lg font-medium mt-2">Image de l'étape 1</label>
+                    <input type="file" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800" id="stepImage1" accept="image/*">
+                </div>
+            </div>
+
+            <button type="button" class="text-teal-600 hover:underline" onclick="addStep()">Ajouter une autre étape</button>
+
+
 
             <!-- Submit Button -->
             <button type="submit" class="w-full bg-gray-600 text-white py-2 rounded-lg mt-6">Créer la Recette</button>
