@@ -68,11 +68,12 @@ def createrecipe(request):
 
 
 
-def recette_info(request, title):
-    recette = get_object_or_404(Recipe, title=title)
+def recette_info(request, recipe_id):
+    recette = get_object_or_404(Recipe, id=recipe_id)
     is_favorited = Favorites.objects.filter(user=request.user, recette=recette).exists() if request.user.is_authenticated else False
     reviews = Avis.objects.filter(recipe=recette)
-    return render(request, 'recipes/recette_info.html', {'recette': recette, 'is_favorited': is_favorited,'reviews':reviews})
+    ingredients = Ingredient.objects.filter(recette=recette)
+    return render(request, 'recipes/recette_info.html', {'recette': recette, 'is_favorited': is_favorited,'reviews':reviews,'ingredients':ingredients})
 
 
 @login_required

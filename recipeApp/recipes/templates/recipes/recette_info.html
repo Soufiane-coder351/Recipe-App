@@ -58,14 +58,9 @@
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ingredients</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <ul class="list-disc list-inside">
-                        <li>200g spaghetti</li>
-                        <li>100g pancetta</li>
-                        <li>2 large eggs</li>
-                    </ul>
-                    <ul class="list-disc list-inside">
-                        <li>50g pecorino cheese</li>
-                        <li>Freshly ground black pepper</li>
-                        <li>Salt</li>
+                        {% for ingredient in ingredients %}
+                            <li>{{ ingredient.produit.name }}</li>
+                        {% endfor %}
                     </ul>
                 </div>
 

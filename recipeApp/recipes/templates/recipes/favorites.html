@@ -62,7 +62,7 @@
                         <p class="text-gray-600 mt-2">{{ fav.recette.description|truncatewords:10 }}</p>
                     </div>
                     <div class="p-4 bg-gray-50">
-                        <a href="{% url 'recette_info' fav.recette.title %}" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 block text-center rounded-lg">Découvrez la recette</a>
+                        <a href="{% url 'recette_info' fav.recette.id %}" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 block text-center rounded-lg">Découvrez la recette</a>
                     </div>
                 </div>
                 {% empty %}

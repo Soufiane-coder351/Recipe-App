@@ -97,7 +97,7 @@
                         <p class="text-gray-600 mt-2">{{ recette.description|truncatewords:10 }}</p>
                     </div>
                     <div class="p-4 bg-gray-50 mt-auto">
-                        <a href="{% url 'recette_info' recette.title%}" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 block text-center rounded-lg">Découvrez la recette</a>
+                        <a href="{% url 'recette_info' recette.id%}" class="bg-teal-500 text-white hover:bg-teal-600 px-4 py-2 block text-center rounded-lg">Découvrez la recette</a>
                     </div>
                 </div>
                 
