@@ -20,7 +20,7 @@ from django.conf import settings
 from django.urls import re_path
 import recipes.views
 from django.conf.urls.static import static
-
+import user.views
 
 
 urlpatterns = [
@@ -28,6 +28,8 @@ urlpatterns = [
     path('recipes/', include('recipes.urls')),
     re_path(r'^$', recipes.views.index),
     path('user/', include('user.urls')),
+    path('delete_recipe/<int:recette_id>/', user.views.delete_recipe, name='delete_recipe'),
+
 ]
 
 if settings.DEBUG:

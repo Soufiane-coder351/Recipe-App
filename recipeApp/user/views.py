@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from recipes.models import Recipe,Favorites
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 
 
@@ -163,3 +164,10 @@ def change_name(request):
 
     # Rendre le template pour la requête GET
     return render(request, 'user/change_name.html')
+
+@login_required
+def delete_recipe(request, recette_id):
+    recette = get_object_or_404(Recipe, id=recette_id, user=request.user)
+    recette.delete()
+    messages.success(request, "La recette a été supprimée avec succès.")
+    return redirect('profile')  # Redirigez vers la page du profil
