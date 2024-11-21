@@ -16,31 +16,54 @@ function addStep() {
     stepsContainer.appendChild(newStep);
 }
 
-// Ingredient handling logic
 const addIngredientBtn = document.getElementById('addIngredientBtn');
 const ingredientInput = document.getElementById('ingredientInput');
 const ingredientsList = document.getElementById('ingredientsList');
+let ingredientsInput = document.getElementById('ingredientsInput'); // The hidden input
 
 addIngredientBtn.addEventListener('click', function () {
     const ingredientValue = ingredientInput.value.trim();
     if (ingredientValue) {
+        // Create a span element for the tag
         const tag = document.createElement('span');
-        tag.classList.add('bg-teal-500', 'text-white', 'px-4', 'py-2', 'rounded-lg');
+        tag.classList.add('inline-flex', 'items-center', 'bg-gray-600', 'text-white', 'text-sm', 'px-3', 'py-1', 'rounded-md');
         tag.textContent = ingredientValue;
 
-        // Add remove button for the tag
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'X';
-        removeBtn.classList.add('text-white', 'ml-2');
+        // Add a remove button to the tag
+        const removeBtn = document.createElement('span');
+        removeBtn.textContent = '×'; // Close icon
+        removeBtn.classList.add('ml-2', 'text-gray-400', 'hover:text-white', 'cursor-pointer', 'text-sm', 'transition');
+        removeBtn.style.display = 'inline-block';
+
         removeBtn.onclick = function () {
             ingredientsList.removeChild(tag);
+            updateIngredients(); // Update the hidden input when an ingredient is removed
         };
 
         tag.appendChild(removeBtn);
         ingredientsList.appendChild(tag);
-        ingredientInput.value = ''; // Clear the input after adding
+
+        ingredientsInput.value = ingredientValue;
+        ingredientInput.value = ''; // Clear the input field
+        // Update the hidden input with the comma-separated ingredients
+        updateIngredients();
     }
 });
+
+// Function to update the hidden ingredients input field
+function updateIngredients() {
+    const tags = ingredientsList.getElementsByTagName('span');
+    let ingredientsArray = [];
+    for (let i = 0; i < tags.length; i++) {
+        ingredientsArray.push(tags[i].textContent.trim().replace('×', '').trim());
+    }
+    console.log("ingredient for now are: ");
+    console.log(ingredientsArray);
+    // Join the ingredients with commas and update the hidden input value
+    ingredientsInput.value = ingredientsArray.join(',');
+}
+
+
 
 // Function to set active category
 function setActiveCategory(button) {

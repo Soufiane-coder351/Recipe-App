@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from recipes.models import Recipe,Avis
-from recipes.models import Favorites
-from django.views import View
+from recipes.models import Recipe,Avis , Ingredient, Produit, Favorites
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -13,6 +11,7 @@ def index(request):
     template = loader.get_template("./recipes/index.html")
     recettes = Recipe.objects.all()
     return HttpResponse(template.render(request=request,context={"recettes":recettes}))
+
 
 
 @login_required
@@ -29,29 +28,43 @@ def createrecipe(request):
         instructions = request.POST.get('instructions')
         image = request.FILES.get('image')
         user = request.user
-        
         errors = []
-        
+
+        # Get ingredients from the request
+        ingredients = request.POST.get('ingredients')  # Get the comma-separated string
+        print("ingredients are : ")
+        print(ingredients)
+
         if Recipe.objects.filter(title=title).exists():
             errors.append("Titre de la recette existe déjà")
-        
+
         if not errors:
             try:
-                recipe = Recipe.objects.create(title=title,description=description,instructions=instructions,user=user,image=image)
+                # Create the recipe
+                recipe = Recipe.objects.create(title=title, description=description, instructions=instructions, user=user, image=image)
                 recipe.save()
+
+                # Convert the comma-separated string into a list
+                ingredient_list = ingredients.split(',') if ingredients else []
+                
+                # For each ingredient, create an Ingredient entry and associate it with the recipe
+                for ingredient_name in ingredient_list:
+                    if ingredient_name:
+                        produit, created = Produit.objects.get_or_create(name=ingredient_name)  # Get or create the ingredient
+                        Ingredient.objects.create(produit=produit, recette=recipe, qtté="")  # Assuming no quantity for now, you can adjust this later
+
                 return redirect('profile')
 
             except Exception as e:
                 errors.append(str(e))
-        
-        return render(request,'recipes/createrecipe.html', {'errors':errors, 'values' : {
-            'title':title,
-            'description':description,
+
+        return render(request, 'recipes/createrecipe.html', {'errors': errors, 'values': {
+            'title': title,
+            'description': description,
             'instructions': instructions
         }})
 
-    return render(request,"recipes/createrecipe.html")
-    
+    return render(request, "recipes/createrecipe.html")
 
 
 
