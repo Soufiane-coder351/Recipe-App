@@ -109,16 +109,24 @@
                     </div>
                 </div>
 
+                
                 <!-- Leave a Review -->
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Laissez un avis</h2>
                     <hr>
+
                     <form action="{% url 'submit_review' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="recipe_id" value="{{ recette.id }}">
+                        
+                        <!-- Note -->
                         <div class="mb-4">
                             <label for="rating" class="block text-gray-700 font-medium mb-2">Note</label>
-                            <select name="rating" id="rating" class="w-full border border-gray-300 rounded-lg p-2">
+                            <select 
+                                name="rating" 
+                                id="rating" 
+                                class="w-full border border-gray-300 rounded-lg p-2 opacity-50"
+                                {% if not user.is_authenticated %} disabled {% endif %}>
                                 <option value="" disabled selected>Choisissez une note...</option>
                                 <option value="5">5 - Excellent</option>
                                 <option value="4">4 - Très bon</option>
@@ -127,14 +135,39 @@
                                 <option value="1">1 - Mauvais</option>
                             </select>
                         </div>
+
+                        <!-- Commentaire -->
                         <div class="mb-4">
                             <label for="comment" class="block text-gray-700 font-medium mb-2">Commentaire</label>
-                            <textarea name="comment" id="comment" class="w-full border border-gray-300 rounded-lg p-2" rows="3" placeholder="Écrivez votre commentaire ici..."></textarea>
+                            <textarea 
+                                name="comment" 
+                                id="comment" 
+                                class="w-full border border-gray-300 rounded-lg p-2 opacity-50" 
+                                rows="3" 
+                                placeholder="Connectez-vous pour écrire un commentaire."
+                                {% if not user.is_authenticated %} disabled {% endif %}>
+                            </textarea>
                         </div>
-                        <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">Soumettre</button>
+                        <!-- Submit Button -->
+                        {% if user.is_authenticated %}
+                        <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">
+                            Soumettre
+                
+                        </button>
+                        {% endif %}
                     </form>
-                    
-                    <!-- Success Message -->
+
+                    <!-- Message for Non-Authenticated Users -->
+                    {% if not user.is_authenticated %}
+                    <div class="mt-4">
+                        <p class="text-gray-500 italic">
+                            Connectez-vous pour noter et laisser un commentaire.
+                        </p>
+                        <a href="{% url 'login' %}" class="btn bg-blue-600 text-white px-4 py-2 rounded-lg mt-2 inline-block">Se connecter</a>
+                    </div>
+                    {% endif %}
+
+                    <!-- Success/Failure Messages -->
                     {% if messages %}
                     {% for message in messages %}
                     {% if message.tags == 'success' %}
@@ -149,6 +182,7 @@
                     {% endfor %}
                     {% endif %}
                 </div>
+
             </div>
         </div>
     </main>
