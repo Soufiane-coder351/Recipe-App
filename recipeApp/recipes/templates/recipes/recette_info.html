@@ -13,7 +13,6 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="{% url 'recipes' %}" class="text-2xl font-semibold text-teal-600">Recipe App</a>
             <div class="flex items-center space-x-4">
-                
                 {% if user.is_authenticated %}
                     <form method="post" action="{% url 'toggle_favorite' recette.id %}" class="flex items-center space-x-2">
                         {% csrf_token %}
@@ -28,11 +27,9 @@
                         {% endif %}
                     </form>
                 {% else %}
-                    <!-- <p class="text-gray-600 mt-4 "> -->
-                        <a href="{% url 'login' %}" class="text-teal-600 hover:underline">
-                            Connectez-vous pour ajouter aux favoris
-                        </a>
-                    <!-- </p> -->
+                    <a href="{% url 'login' %}" class="text-teal-600 hover:underline">
+                        Connectez-vous pour ajouter aux favoris
+                    </a>
                 {% endif %}
             </div>
         </div>
@@ -52,10 +49,10 @@
             <!-- Recipe Details (Span 2 Columns) -->
             <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
                 <img src="../../../recipes_photos/{{recette.image }}" 
-                class="w-full h-[400px] object-cover rounded-lg" 
-                onerror="this.onerror=null; this.src='https://dummyimage.com/900x400/ced4da/6c757d.jpg';">
+                    class="w-full h-[400px] object-cover rounded-lg" 
+                    onerror="this.onerror=null; this.src='https://dummyimage.com/900x400/ced4da/6c757d.jpg';">
                 <hr class="my-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ingredients</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ingrédients</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <ul class="list-disc list-inside">
                         {% for ingredient in ingredients %}
@@ -63,8 +60,6 @@
                         {% endfor %}
                     </ul>
                 </div>
-
-                
 
                 <hr class="my-6">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Instructions</h2>
@@ -92,25 +87,32 @@
                             <p class="text-gray-800">Cette recette n'a aucun avis.</p>
                         {% endif %}
                         {% for review in reviews %}
-                            <div>
-                                <h6 class="font-bold text-gray-800">{{ review.user.username }}</h6>
-                                <div class="flex space-x-1 text-yellow-500">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star text-gray-300"></i>
+                            <div class="flex justify-between items-center">  <!-- Flex pour aligner sur une même ligne -->
+                                <div>
+                                    <h6 class="font-bold text-gray-800">{{ review.user.username }}</h6>
+                                    <p class="text-gray-600 mt-2">{{ review.content }}</p>
+                                    <small class="text-gray-500">Posté le {{ review.created_at }}</small>
                                 </div>
-                                <p class="text-gray-600 mt-2">{{ review.content }}</p>
-                                <small class="text-gray-500">Posté le {{ review.created_at }}</small>
 
+                                <!-- Bouton Supprimer (uniquement pour l'auteur de l'avis) -->
+                                {% if review.user == request.user %}
+                                    <form action="{% url 'delete_review' review.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button 
+                                            type="submit" 
+                                            class="text-red-500 hover:underline"
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                {% endif %}
                             </div>
                             <hr>
                         {% endfor %}
                     </div>
                 </div>
 
-                
+
                 <!-- Leave a Review -->
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Laissez un avis</h2>
@@ -153,7 +155,6 @@
                         {% if user.is_authenticated %}
                         <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-lg">
                             Soumettre
-                
                         </button>
                         {% endif %}
                     </form>
@@ -183,7 +184,6 @@
                     {% endfor %}
                     {% endif %}
                 </div>
-
             </div>
         </div>
     </main>

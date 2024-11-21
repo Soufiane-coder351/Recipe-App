@@ -156,3 +156,15 @@ def submit_review(request):
     return HttpResponse("Invalid request method.", status=405)
 
 
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(Avis, id=review_id)
+
+    # Vérifier que l'utilisateur est le propriétaire du commentaire
+    if review.user != request.user:
+        messages.error(request, "Vous n'avez pas la permission de supprimer ce commentaire.")
+        return redirect('recette_info', recipe_id=review.recipe.id)
+    
+    review.delete()
+    messages.success(request, "Votre commentaire a été supprimé avec succès.")
+    return redirect('recette_info', recipe_id=review.recipe.id)
