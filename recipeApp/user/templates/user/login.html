@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -9,6 +10,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 font-sans antialiased">
     <!-- Navigation -->
     <nav class="bg-gray-900">
@@ -22,7 +24,8 @@
 
     <!-- Split Section -->
     <section class="h-[calc(100vh-6rem)] flex items-center justify-center">
-        <div class="container mx-auto max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
+        <div
+            class="container mx-auto max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
             <!-- Form Section -->
             <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
                 <div class="text-center mb-6">
@@ -33,49 +36,37 @@
                     {% csrf_token %}
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-medium text-gray-700">Adresse mail</label>
-                        <input 
-                            type="email" 
-                            name="email" 
-                            id="email" 
-                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm" 
-                            placeholder="Entrez votre adresse mail"
-                            required
-                        />
+                        <input type="email" name="email" id="email"
+                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm"
+                            placeholder="Entrez votre adresse mail" required />
                     </div>
                     <div class="mb-4">
                         <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            id="password" 
-                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm" 
-                            placeholder="Entrez votre mot de passe"
-                            required
-                        />
+                        <input type="password" name="password" id="password"
+                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm"
+                            placeholder="Entrez votre mot de passe" required />
                     </div>
                     <div class="mb-4">
-                        <button 
-                            type="submit" 
-                            class="w-full bg-teal-500 text-white py-2 text-sm rounded-lg shadow-md hover:bg-teal-600 transition"
-                        >
+                        <button type="submit"
+                            class="w-full bg-teal-500 text-white py-2 text-sm rounded-lg shadow-md hover:bg-teal-600 transition">
                             Se connecter
                         </button>
                     </div>
                     <div class="text-center">
                         <p class="text-sm text-gray-600">
-                            Vous n'avez pas de compte ? 
+                            Vous n'avez pas de compte ?
                             <a href="{% url 'signup' %}" class="text-teal-500 hover:underline">S'inscrire</a>
                         </p>
                     </div>
                 </form>
                 {% if errors %}
-                    <div class="mt-4 bg-red-50 border border-red-200 text-red-600 p-3 rounded-lg">
-                        <ul>
-                            {% for error in errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="mt-4 bg-red-50 border border-red-200 text-red-600 p-3 rounded-lg">
+                    <ul>
+                        {% for error in errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% endif %}
             </div>
 
@@ -89,8 +80,9 @@
     <!-- Footer -->
     <footer class="bg-gray-900 py-4">
         <div class="container mx-auto text-center text-white">
-            <p>&copy; Recipe App 2023. All Rights Reserved.</p>
+            <p>&copy; Recipe App 2024. Tous droits réservés.</p>
         </div>
     </footer>
 </body>
+
 </html>
