@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.db.utils import IntegrityError
 
 def index(request):
     template = loader.get_template("./recipes/index.html")
@@ -141,12 +142,16 @@ def submit_review(request):
             recipe = Recipe.objects.get(id=recipe_id)
         except Recipe.DoesNotExist:
             return HttpResponse("Recipe not found", status=404)
-        rating = request.POST.get('rating')
-        comment = request.POST.get('comment')  
-
-        # Save the rating and comment to the database
-        Avis.objects.create(recipe=recipe, user=request.user, content=comment, rating=rating)
-        messages.success(request, "Votre avis est transmis avec succès !")
+        
+        try:
+            rating = request.POST.get('rating')            
+            comment = request.POST.get('comment')  
+            # Save the rating and comment to the database
+            Avis.objects.create(recipe=recipe, user=request.user, content=comment, rating=rating)
+            messages.success(request, "Votre avis est transmis avec succès !")
+        except IntegrityError as e:
+            messages.error(request,"Vous devez mettre une note")
+        
         return redirect('recette_info', recipe_id=recipe.id)  # Redirect to the recipe page
     return HttpResponse("Invalid request method.", status=405)
 
