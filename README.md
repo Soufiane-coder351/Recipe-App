@@ -16,7 +16,7 @@ Dans le cadre des CodingWeeks, nous avons réalisé un site internet, Recipe App
 *   [Codeur et remerciement](#codeur_et_remerciement)
 
 ## Name
-Le nom du site est **Recipe App**
+Le nom du site est **Recipe App**.
 
 ## Description
 L'idée de base était de créer un **site** permettant aux utilisateurs de **partager** leurs **recettes de cuisine** préférées de façon **intuitive** et **rapide**, et de consulter les recttes des autres utilisateurs avec la même simplicité. 
