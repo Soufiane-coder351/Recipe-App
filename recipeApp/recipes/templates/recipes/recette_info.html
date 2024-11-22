@@ -140,7 +140,7 @@
                             <label for="comment" class="block text-gray-700 font-medium mb-2">Commentaire</label>
                             <textarea name="comment" id="comment"
                                 class="w-full border border-gray-300 rounded-lg p-2 opacity-50" rows="3"
-                                placeholder="Connectez-vous pour écrire un commentaire." {% if not user.is_authenticated %} disabled {% endif %} required>
+                                 {% if not user.is_authenticated %}placeholder="Connectez-vous pour écrire un commentaire." disabled {% endif %} required>
                             </textarea>
                         </div>
                         <!-- Submit Button -->
