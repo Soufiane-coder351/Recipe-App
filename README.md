@@ -39,7 +39,13 @@ De même, si le client cherche une recette en particulier, ou tout simplement qu
 -   **Filtrer** par régime alimentaire, par type de repas dans la journée (petit-déjeuner, déjeuner, dîner).
 -   **Éditer** les recettes déjà ajoutées par l'utilisateur.
 -   Implémeter une recherche par ingrédients: Si un utilisateur a certains ingrédients dans son réfrégirateur, il peut les introduire dans la barre de recherche et site lui suggère des recettes compatibles avec ses ingrédients.
-
+-   **Lister** les posts sur la pages d'acceuil en fonction des préférences de l'utilisateur. 
+-   **Modifier** ses recettes
+-   **Implémenter** des images pour les étapes de la recette.
+-   **Tagger** les autres utilisateurs
+-   **Ajouter** une photo de profil
+-   **Partager** les recettes
+-   **Se connecter** grâce à appleid, gmail, github...
 ## Codeurs et remerciement
 
 Un grand **Merci** à toute les personnes ayant participé à ce projet : Soufien El Mazlouzi, Solal Abitbol,  Ismail Ameur, Hiba Jlibina, Asmae El Mahdaouy, Ayoub Chikri. 
