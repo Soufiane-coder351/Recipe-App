@@ -7,6 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Recipe App - Se connecter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -36,16 +37,30 @@
                     {% csrf_token %}
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-medium text-gray-700">Adresse mail</label>
-                        <input type="email" name="email" id="email"
-                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm"
-                            placeholder="Entrez votre adresse mail" required />
+                        <div class="relative mt-1">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <!-- Envelope Icon -->
+                                <i class="fa-solid fa-envelope text-gray-400"></i>
+                            </span>
+                            <input type="email" name="email" id="email"
+                                class="w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm pl-10"
+                                placeholder="Entrez votre adresse mail" required />
+                        </div>
                     </div>
+                    
                     <div class="mb-4">
                         <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
-                        <input type="password" name="password" id="password"
-                            class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm"
-                            placeholder="Entrez votre mot de passe" required />
+                        <div class="relative mt-1">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <!-- Lock Icon -->
+                                <i class="fa-solid fa-lock text-gray-400"></i>
+                            </span>
+                            <input type="password" name="password" id="password"
+                                class="w-full border border-gray-300 rounded-lg shadow-sm focus:border-teal-500 focus:ring focus:ring-teal-200 focus:ring-opacity-50 px-4 py-2 text-sm pl-10"
+                                placeholder="Entrez votre mot de passe" required />
+                        </div>
                     </div>
+                    
                     <div class="mb-4">
                         <button type="submit"
                             class="w-full bg-teal-500 text-white py-2 text-sm rounded-lg shadow-md hover:bg-teal-600 transition">
