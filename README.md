@@ -1,7 +1,7 @@
 # Recipe App par WebWizards
 
 
-## Intro
+## Introduction
 
 Dans le cadre des CodingWeeks, nous avons réalisé un site internet, Recipe App, de recettes de cuisine communautaire permettant au gens de partager et de consulter des recettes. 
 
@@ -40,7 +40,7 @@ De même, si le client cherche une recette en particulier, ou tout simplement qu
 -   **Éditer** les recettes déjà ajoutées par l'utilisateur.
 -   Implémeter une recherche par ingrédients: Si un utilisateur a certains ingrédients dans son réfrégirateur, il peut les introduire dans la barre de recherche et site lui suggère des recettes compatibles avec ses ingrédients.
 
-## Codeur et remerciement
+## Codeurs et remerciement
 
 Un grand **Merci** à toute les personnes ayant participé à ce projet : Soufien El Mazlouzi, Solal Abitbol,  Ismail Ameur, Hiba Jlibina, Asmae El Mahdaouy, Ayoub Chikri. 
 
