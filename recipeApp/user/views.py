@@ -164,8 +164,6 @@ def change_name(request):
         request.user.username = new_name
         request.user.save()
 
-        # Affichage d'un message de succès
-        messages.success(request, "Votre nom a été changé avec succès.")
         return redirect('profile')  # Redirection après succès
 
     # Rendre le template pour la requête GET
@@ -177,5 +175,4 @@ def change_name(request):
 def delete_recipe(request, recette_id):
     recette = get_object_or_404(Recipe, id=recette_id, user=request.user)
     recette.delete()
-    messages.success(request, "La recette a été supprimée avec succès.")
     return redirect('profile')  # Redirigez vers la page du profil
