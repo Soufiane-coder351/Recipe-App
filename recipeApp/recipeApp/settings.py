@@ -83,13 +83,15 @@ WSGI_APPLICATION = 'recipeApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'recipeapp',
-        'USER': 'test_user',
+        'NAME': 'recipeapp',  # Your PostgreSQL database name
+        'USER': 'test_user',  # The user you created
         'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'localhost',  # PostgreSQL host (default is localhost)
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
+
 
 
 
